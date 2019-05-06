@@ -244,7 +244,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="dbQLKho" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="dbQLKhoEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Menus" EntityType="Self.Menu" />
     <EntitySet Name="tbCT_PhieuNhap" EntityType="Self.tbCT_PhieuNhap" />
     <EntitySet Name="tbCT_PhieuXuat" EntityType="Self.tbCT_PhieuXuat" />

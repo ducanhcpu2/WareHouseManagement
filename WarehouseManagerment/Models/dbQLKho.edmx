@@ -530,7 +530,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbQLKho" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dbQLKhoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Menus" EntityType="Self.Menu" />
           <EntitySet Name="tbCT_PhieuNhap" EntityType="Self.tbCT_PhieuNhap" />
           <EntitySet Name="tbCT_PhieuXuat" EntityType="Self.tbCT_PhieuXuat" />
@@ -587,7 +587,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbQLKhoModelStoreContainer" CdmEntityContainer="dbQLKho">
+        <EntityContainerMapping StorageEntityContainer="dbQLKhoModelStoreContainer" CdmEntityContainer="dbQLKhoEntities">
           <EntitySetMapping Name="Menus">
             <EntityTypeMapping TypeName="dbQLKhoModel.Menu">
               <MappingFragment StoreEntitySet="Menu">
