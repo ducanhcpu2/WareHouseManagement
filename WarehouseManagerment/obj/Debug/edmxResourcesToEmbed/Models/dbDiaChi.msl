@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbDiaChiModelStoreContainer" CdmEntityContainer="dbDiaChi">
+    <EntitySetMapping Name="tbHuyen_">
+      <EntityTypeMapping TypeName="dbDiaChiModel.tbHuyen_">
+        <MappingFragment StoreEntitySet="tbHuyen$">
+          <ScalarProperty Name="MaHuyen" ColumnName="MaHuyen" />
+          <ScalarProperty Name="TenHuyen" ColumnName="TenHuyen" />
+          <ScalarProperty Name="LoaiHuyen" ColumnName="LoaiHuyen" />
+          <ScalarProperty Name="ToaDo" ColumnName="ToaDo" />
+          <ScalarProperty Name="MaTinh" ColumnName="MaTinh" />
+          <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbTinh_">
+      <EntityTypeMapping TypeName="dbDiaChiModel.tbTinh_">
+        <MappingFragment StoreEntitySet="tbTinh$">
+          <ScalarProperty Name="MaTinh" ColumnName="MaTinh" />
+          <ScalarProperty Name="TenTinh" ColumnName="TenTinh" />
+          <ScalarProperty Name="LoaiTinh" ColumnName="LoaiTinh" />
+          <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbXa_">
+      <EntityTypeMapping TypeName="dbDiaChiModel.tbXa_">
+        <MappingFragment StoreEntitySet="tbXa$">
+          <ScalarProperty Name="MaXa" ColumnName="MaXa" />
+          <ScalarProperty Name="TenXa" ColumnName="TenXa" />
+          <ScalarProperty Name="LoaiXa" ColumnName="LoaiXa" />
+          <ScalarProperty Name="ToaDo" ColumnName="ToaDo" />
+          <ScalarProperty Name="MaHuyen" ColumnName="MaHuyen" />
+          <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

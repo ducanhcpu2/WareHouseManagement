@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbDiaChiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbHuyen$">
+    <Key>
+      <PropertyRef Name="MaHuyen" />
+    </Key>
+    <Property Name="MaHuyen" Type="int" Nullable="false" />
+    <Property Name="TenHuyen" Type="nvarchar" MaxLength="255" />
+    <Property Name="LoaiHuyen" Type="nvarchar" MaxLength="255" />
+    <Property Name="ToaDo" Type="nvarchar" MaxLength="255" />
+    <Property Name="MaTinh" Type="int" />
+    <Property Name="ViTri" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbTinh$">
+    <Key>
+      <PropertyRef Name="MaTinh" />
+    </Key>
+    <Property Name="MaTinh" Type="int" Nullable="false" />
+    <Property Name="TenTinh" Type="nvarchar" MaxLength="255" />
+    <Property Name="LoaiTinh" Type="nvarchar" MaxLength="255" />
+    <Property Name="ViTri" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbXa$">
+    <Key>
+      <PropertyRef Name="MaXa" />
+    </Key>
+    <Property Name="MaXa" Type="int" Nullable="false" />
+    <Property Name="TenXa" Type="nvarchar" MaxLength="255" />
+    <Property Name="LoaiXa" Type="nvarchar" MaxLength="255" />
+    <Property Name="ToaDo" Type="nvarchar" MaxLength="255" />
+    <Property Name="MaHuyen" Type="int" />
+    <Property Name="ViTri" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="dbDiaChiModelStoreContainer">
+    <EntitySet Name="tbHuyen$" EntityType="Self.tbHuyen$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbTinh$" EntityType="Self.tbTinh$" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbXa$" EntityType="Self.tbXa$" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbDiaChiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbHuyen$">
+          <Key>
+            <PropertyRef Name="MaHuyen" />
+          </Key>
+          <Property Name="MaHuyen" Type="int" Nullable="false" />
+          <Property Name="TenHuyen" Type="nvarchar" MaxLength="255" />
+          <Property Name="LoaiHuyen" Type="nvarchar" MaxLength="255" />
+          <Property Name="ToaDo" Type="nvarchar" MaxLength="255" />
+          <Property Name="MaTinh" Type="int" />
+          <Property Name="ViTri" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbTinh$">
+          <Key>
+            <PropertyRef Name="MaTinh" />
+          </Key>
+          <Property Name="MaTinh" Type="int" Nullable="false" />
+          <Property Name="TenTinh" Type="nvarchar" MaxLength="255" />
+          <Property Name="LoaiTinh" Type="nvarchar" MaxLength="255" />
+          <Property Name="ViTri" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbXa$">
+          <Key>
+            <PropertyRef Name="MaXa" />
+          </Key>
+          <Property Name="MaXa" Type="int" Nullable="false" />
+          <Property Name="TenXa" Type="nvarchar" MaxLength="255" />
+          <Property Name="LoaiXa" Type="nvarchar" MaxLength="255" />
+          <Property Name="ToaDo" Type="nvarchar" MaxLength="255" />
+          <Property Name="MaHuyen" Type="int" />
+          <Property Name="ViTri" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="dbDiaChiModelStoreContainer">
+          <EntitySet Name="tbHuyen$" EntityType="Self.tbHuyen$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbTinh$" EntityType="Self.tbTinh$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbXa$" EntityType="Self.tbXa$" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbDiaChiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbHuyen_">
+          <Key>
+            <PropertyRef Name="MaHuyen" />
+          </Key>
+          <Property Name="MaHuyen" Type="Int32" Nullable="false" />
+          <Property Name="TenHuyen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiHuyen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ToaDo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MaTinh" Type="Int32" />
+          <Property Name="ViTri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tbTinh_">
+          <Key>
+            <PropertyRef Name="MaTinh" />
+          </Key>
+          <Property Name="MaTinh" Type="Int32" Nullable="false" />
+          <Property Name="TenTinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiTinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ViTri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="tbXa_">
+          <Key>
+            <PropertyRef Name="MaXa" />
+          </Key>
+          <Property Name="MaXa" Type="Int32" Nullable="false" />
+          <Property Name="TenXa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LoaiXa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ToaDo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MaHuyen" Type="Int32" />
+          <Property Name="ViTri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityContainer Name="dbDiaChi" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbHuyen_" EntityType="Self.tbHuyen_" />
+          <EntitySet Name="tbTinh_" EntityType="Self.tbTinh_" />
+          <EntitySet Name="tbXa_" EntityType="Self.tbXa_" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbDiaChiModelStoreContainer" CdmEntityContainer="dbDiaChi">
+          <EntitySetMapping Name="tbHuyen_">
+            <EntityTypeMapping TypeName="dbDiaChiModel.tbHuyen_">
+              <MappingFragment StoreEntitySet="tbHuyen$">
+                <ScalarProperty Name="MaHuyen" ColumnName="MaHuyen" />
+                <ScalarProperty Name="TenHuyen" ColumnName="TenHuyen" />
+                <ScalarProperty Name="LoaiHuyen" ColumnName="LoaiHuyen" />
+                <ScalarProperty Name="ToaDo" ColumnName="ToaDo" />
+                <ScalarProperty Name="MaTinh" ColumnName="MaTinh" />
+                <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTinh_">
+            <EntityTypeMapping TypeName="dbDiaChiModel.tbTinh_">
+              <MappingFragment StoreEntitySet="tbTinh$">
+                <ScalarProperty Name="MaTinh" ColumnName="MaTinh" />
+                <ScalarProperty Name="TenTinh" ColumnName="TenTinh" />
+                <ScalarProperty Name="LoaiTinh" ColumnName="LoaiTinh" />
+                <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbXa_">
+            <EntityTypeMapping TypeName="dbDiaChiModel.tbXa_">
+              <MappingFragment StoreEntitySet="tbXa$">
+                <ScalarProperty Name="MaXa" ColumnName="MaXa" />
+                <ScalarProperty Name="TenXa" ColumnName="TenXa" />
+                <ScalarProperty Name="LoaiXa" ColumnName="LoaiXa" />
+                <ScalarProperty Name="ToaDo" ColumnName="ToaDo" />
+                <ScalarProperty Name="MaHuyen" ColumnName="MaHuyen" />
+                <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

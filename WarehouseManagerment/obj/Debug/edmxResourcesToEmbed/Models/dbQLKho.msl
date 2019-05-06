@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbQLKhoModelStoreContainer" CdmEntityContainer="dbQLKho">
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="dbQLKhoModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="parentId" ColumnName="parentId" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="index" ColumnName="index" />
+          <ScalarProperty Name="fontAwesome" ColumnName="fontAwesome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbCT_PhieuNhap">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbCT_PhieuNhap">
+        <MappingFragment StoreEntitySet="tbCT_PhieuNhap">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ipBillId" ColumnName="ipBillId" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="priceCurrent" ColumnName="priceCurrent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbCT_PhieuXuat">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbCT_PhieuXuat">
+        <MappingFragment StoreEntitySet="tbCT_PhieuXuat">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="opBillId" ColumnName="opBillId" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="priceCurrent" ColumnName="priceCurrent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbHangHoas">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbHangHoa">
+        <MappingFragment StoreEntitySet="tbHangHoa">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbLoaiHangHoas">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbLoaiHangHoa">
+        <MappingFragment StoreEntitySet="tbLoaiHangHoa">
+          <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+          <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbNhaPhanPhois">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbNhaPhanPhoi">
+        <MappingFragment StoreEntitySet="tbNhaPhanPhoi">
+          <ScalarProperty Name="distributorId" ColumnName="distributorId" />
+          <ScalarProperty Name="distributorName" ColumnName="distributorName" />
+          <ScalarProperty Name="distributorAddress" ColumnName="distributorAddress" />
+          <ScalarProperty Name="distributonTown" ColumnName="distributonTown" />
+          <ScalarProperty Name="distributonNumberPhone" ColumnName="distributonNumberPhone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbNhaSanXuats">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbNhaSanXuat">
+        <MappingFragment StoreEntitySet="tbNhaSanXuat">
+          <ScalarProperty Name="producerId" ColumnName="producerId" />
+          <ScalarProperty Name="producerName" ColumnName="producerName" />
+          <ScalarProperty Name="producerAddress" ColumnName="producerAddress" />
+          <ScalarProperty Name="producerTown" ColumnName="producerTown" />
+          <ScalarProperty Name="producerNumberPhone" ColumnName="producerNumberPhone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbPhieuNhaps">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbPhieuNhap">
+        <MappingFragment StoreEntitySet="tbPhieuNhap">
+          <ScalarProperty Name="ipBillId" ColumnName="ipBillId" />
+          <ScalarProperty Name="priceTotal" ColumnName="priceTotal" />
+          <ScalarProperty Name="producerId" ColumnName="producerId" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="whatDate" ColumnName="whatDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbPhieuXuats">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbPhieuXuat">
+        <MappingFragment StoreEntitySet="tbPhieuXuat">
+          <ScalarProperty Name="opBillId" ColumnName="opBillId" />
+          <ScalarProperty Name="priceTotal" ColumnName="priceTotal" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="distributorId" ColumnName="distributorId" />
+          <ScalarProperty Name="whatDate" ColumnName="whatDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbTaiKhoans">
+      <EntityTypeMapping TypeName="dbQLKhoModel.tbTaiKhoan">
+        <MappingFragment StoreEntitySet="tbTaiKhoan">
+          <ScalarProperty Name="accountName" ColumnName="accountName" />
+          <ScalarProperty Name="accountDate" ColumnName="accountDate" />
+          <ScalarProperty Name="accountSex" ColumnName="accountSex" />
+          <ScalarProperty Name="accountHometown" ColumnName="accountHometown" />
+          <ScalarProperty Name="accountNumberPhone" ColumnName="accountNumberPhone" />
+          <ScalarProperty Name="accountAddress" ColumnName="accountAddress" />
+          <ScalarProperty Name="accountTown" ColumnName="accountTown" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="passWord" ColumnName="passWord" />
+          <ScalarProperty Name="accountImage" ColumnName="accountImage" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

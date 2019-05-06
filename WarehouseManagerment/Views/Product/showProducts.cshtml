@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "showProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using WarehouseManagerment.Models;
+@using WarehouseManagerment.Core.CSharp;
+
+@{
+    tbTaiKhoan acc = new tbTaiKhoan();
+    try
+    {
+        acc = (tbTaiKhoan)Session["user"];
+    }
+    catch
+    {
+        <script>
+                                window.location.href = "../Account/Login";
+        </script>
+    }
+}
+<div class="myDesignTitle-0">
+    <div class="myDesignTitle-1">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>QUẢN LÝ KHO</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">QLKho</a></li>
+                            <li><a href="#">Hàng hóa</a></li>
+                            <li class="active">Danh sách</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="animated fadeIn">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Danh sách học sinh</strong>
+                </div>
+                <div class="card-body">
+                    <div id="bootstrap-data-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                        <div class="col-sm-12">
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="bootstrap-data-table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 192px;">STT</th>
+                                        <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 313px;">Tên hàng hóa</th>
+                                        <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 110px;">Loại hàng hóa</th>
+                                        <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 110px;">Số lượng</th>
+                                        <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 139px;">Đơn giá</th>
+                                        <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 110px;">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        List<tbHangHoa> ProductList = ViewBag.ProductList;
+                                        int i = 0;
+                                        foreach (var item in ProductList)
+                                        {
+                                            i++;
+                                            <tr role="row" class="even">
+                                                <td class="sorting_1">@i</td>
+                                                <td>@item.productName</td>
+                                                <td>@item.tbLoaiHangHoa.categoryName</td>
+                                                <td>@item.amount</td>                                                
+                                                <td><span class="badge badge-complete">@item.price</span><span class="badge badge-complete" style="padding-bottom:0px;text-transform:none;"><sup>đ</sup></span></td>
+                                                <td style="text-align:center;"><i class="fas fa-eye function function-eye" style="padding-right:10px" onclick="redirectToLink('/Product/viewProduct?ProductId=@item.productId')"></i><i class="fas fa-edit function" style="color:#27ae60;padding-right:10px;" onclick="redirectToLink('/Product/editProduct?ProductId=@item.productId')"></i><i class="fas fa-backspace function" style="color:#e74c3c;" data-toggle="modal" data-target="#staticModal" onclick="changeCurrentId(@item.productId,'@item.productName')"></i></td>
+                                            </tr>
+                                                    }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticModalLabel">Cảnh bảo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="mess-notify">
+
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Hủy</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requestDeleteReader()">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var currentId = 0;
+    function changeCurrentId(id,name)
+    {
+        currentId = id;
+        document.getElementById("mess-notify").innerHTML = "Bạn có muốn xóa học sinh </br>"+name;
+    }
+    function closeModal()
+    {
+        jQuery("body").removeClass("modal-open");
+        setTimeout(function () { jQuery("body").css("padding-right", "0px"); }, 500);
+
+    }
+    function requestDeleteReader() {
+        closeModal();
+        pData = { studentId: currentId };
+        request.put("POST", "/Product/deleteProduct", pData, function (Response) {
+            if (Response == true)
+            {
+                notify.call_save_1("Xóa thành công!", "/Product/showProducts");
+                setTimeout(function () {
+                    window.location.href = "/Product/showProducts";
+                }, 5000);
+            }
+            else
+            {
+                notify.call_save_1("Xóa thất bại!", "/Product/showProducts");
+            }
+        }, function () { }, function () { });
+
+    }
+</script>

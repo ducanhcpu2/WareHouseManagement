@@ -1,0 +1,728 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbQLKhoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="parentId" Type="int" />
+          <Property Name="url" Type="nvarchar" MaxLength="256" />
+          <Property Name="index" Type="int" />
+          <Property Name="fontAwesome" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbCT_PhieuNhap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ipBillId" Type="int" />
+          <Property Name="productId" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="priceCurrent" Type="int" />
+        </EntityType>
+        <EntityType Name="tbCT_PhieuXuat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="opBillId" Type="int" />
+          <Property Name="productId" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="priceCurrent" Type="int" />
+        </EntityType>
+        <EntityType Name="tbHangHoa">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productName" Type="nvarchar" MaxLength="100" />
+          <Property Name="categoryId" Type="int" />
+          <Property Name="amount" Type="int" />
+          <Property Name="price" Type="int" />
+        </EntityType>
+        <EntityType Name="tbLoaiHangHoa">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbNhaPhanPhoi">
+          <Key>
+            <PropertyRef Name="distributorId" />
+          </Key>
+          <Property Name="distributorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="distributorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="distributorAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="distributonTown" Type="int" />
+          <Property Name="distributonNumberPhone" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="tbNhaSanXuat">
+          <Key>
+            <PropertyRef Name="producerId" />
+          </Key>
+          <Property Name="producerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="producerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="producerAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="producerTown" Type="int" />
+          <Property Name="producerNumberPhone" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="tbPhieuNhap">
+          <Key>
+            <PropertyRef Name="ipBillId" />
+          </Key>
+          <Property Name="ipBillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="priceTotal" Type="int" />
+          <Property Name="producerId" Type="int" />
+          <Property Name="accountId" Type="int" />
+          <Property Name="whatDate" Type="date" />
+        </EntityType>
+        <EntityType Name="tbPhieuXuat">
+          <Key>
+            <PropertyRef Name="opBillId" />
+          </Key>
+          <Property Name="opBillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="priceTotal" Type="int" />
+          <Property Name="accountId" Type="int" />
+          <Property Name="distributorId" Type="int" />
+          <Property Name="whatDate" Type="date" />
+        </EntityType>
+        <EntityType Name="tbTaiKhoan">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountName" Type="nvarchar" MaxLength="50" />
+          <Property Name="accountDate" Type="date" />
+          <Property Name="accountSex" Type="nvarchar" MaxLength="5" />
+          <Property Name="accountHometown" Type="int" />
+          <Property Name="accountNumberPhone" Type="varchar" MaxLength="15" />
+          <Property Name="accountAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="accountTown" Type="int" />
+          <Property Name="userName" Type="varchar" MaxLength="20" />
+          <Property Name="passWord" Type="varchar" MaxLength="100" />
+          <Property Name="accountImage" Type="varchar" MaxLength="200" />
+          <Property Name="accountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Menu__parentId__21B6055D">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="parentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCT_Phie__ipBil__22AA2996">
+          <End Role="tbPhieuNhap" Type="Self.tbPhieuNhap" Multiplicity="0..1" />
+          <End Role="tbCT_PhieuNhap" Type="Self.tbCT_PhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPhieuNhap">
+              <PropertyRef Name="ipBillId" />
+            </Principal>
+            <Dependent Role="tbCT_PhieuNhap">
+              <PropertyRef Name="ipBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCT_Phie__opBil__24927208">
+          <End Role="tbPhieuXuat" Type="Self.tbPhieuXuat" Multiplicity="0..1" />
+          <End Role="tbCT_PhieuXuat" Type="Self.tbCT_PhieuXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPhieuXuat">
+              <PropertyRef Name="opBillId" />
+            </Principal>
+            <Dependent Role="tbCT_PhieuXuat">
+              <PropertyRef Name="opBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCT_Phie__produ__239E4DCF">
+          <End Role="tbHangHoa" Type="Self.tbHangHoa" Multiplicity="0..1" />
+          <End Role="tbCT_PhieuNhap" Type="Self.tbCT_PhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbHangHoa">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="tbCT_PhieuNhap">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCT_Phie__produ__25869641">
+          <End Role="tbHangHoa" Type="Self.tbHangHoa" Multiplicity="0..1" />
+          <End Role="tbCT_PhieuXuat" Type="Self.tbCT_PhieuXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbHangHoa">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="tbCT_PhieuXuat">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbHangHoa__categ__267ABA7A">
+          <End Role="tbLoaiHangHoa" Type="Self.tbLoaiHangHoa" Multiplicity="0..1" />
+          <End Role="tbHangHoa" Type="Self.tbHangHoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLoaiHangHoa">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="tbHangHoa">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbPhieuNh__accou__276EDEB3">
+          <End Role="tbTaiKhoan" Type="Self.tbTaiKhoan" Multiplicity="0..1" />
+          <End Role="tbPhieuNhap" Type="Self.tbPhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTaiKhoan">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="tbPhieuNhap">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbPhieuNh__produ__286302EC">
+          <End Role="tbNhaSanXuat" Type="Self.tbNhaSanXuat" Multiplicity="0..1" />
+          <End Role="tbPhieuNhap" Type="Self.tbPhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNhaSanXuat">
+              <PropertyRef Name="producerId" />
+            </Principal>
+            <Dependent Role="tbPhieuNhap">
+              <PropertyRef Name="producerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbPhieuXu__accou__29572725">
+          <End Role="tbTaiKhoan" Type="Self.tbTaiKhoan" Multiplicity="0..1" />
+          <End Role="tbPhieuXuat" Type="Self.tbPhieuXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTaiKhoan">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="tbPhieuXuat">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbPhieuXu__distr__2A4B4B5E">
+          <End Role="tbNhaPhanPhoi" Type="Self.tbNhaPhanPhoi" Multiplicity="0..1" />
+          <End Role="tbPhieuXuat" Type="Self.tbPhieuXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNhaPhanPhoi">
+              <PropertyRef Name="distributorId" />
+            </Principal>
+            <Dependent Role="tbPhieuXuat">
+              <PropertyRef Name="distributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbQLKhoModelStoreContainer">
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCT_PhieuNhap" EntityType="Self.tbCT_PhieuNhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCT_PhieuXuat" EntityType="Self.tbCT_PhieuXuat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbHangHoa" EntityType="Self.tbHangHoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbLoaiHangHoa" EntityType="Self.tbLoaiHangHoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbNhaPhanPhoi" EntityType="Self.tbNhaPhanPhoi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbNhaSanXuat" EntityType="Self.tbNhaSanXuat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPhieuNhap" EntityType="Self.tbPhieuNhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPhieuXuat" EntityType="Self.tbPhieuXuat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbTaiKhoan" EntityType="Self.tbTaiKhoan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Menu__parentId__21B6055D" Association="Self.FK__Menu__parentId__21B6055D">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCT_Phie__ipBil__22AA2996" Association="Self.FK__tbCT_Phie__ipBil__22AA2996">
+            <End Role="tbPhieuNhap" EntitySet="tbPhieuNhap" />
+            <End Role="tbCT_PhieuNhap" EntitySet="tbCT_PhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCT_Phie__opBil__24927208" Association="Self.FK__tbCT_Phie__opBil__24927208">
+            <End Role="tbPhieuXuat" EntitySet="tbPhieuXuat" />
+            <End Role="tbCT_PhieuXuat" EntitySet="tbCT_PhieuXuat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCT_Phie__produ__239E4DCF" Association="Self.FK__tbCT_Phie__produ__239E4DCF">
+            <End Role="tbHangHoa" EntitySet="tbHangHoa" />
+            <End Role="tbCT_PhieuNhap" EntitySet="tbCT_PhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCT_Phie__produ__25869641" Association="Self.FK__tbCT_Phie__produ__25869641">
+            <End Role="tbHangHoa" EntitySet="tbHangHoa" />
+            <End Role="tbCT_PhieuXuat" EntitySet="tbCT_PhieuXuat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbHangHoa__categ__267ABA7A" Association="Self.FK__tbHangHoa__categ__267ABA7A">
+            <End Role="tbLoaiHangHoa" EntitySet="tbLoaiHangHoa" />
+            <End Role="tbHangHoa" EntitySet="tbHangHoa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbPhieuNh__accou__276EDEB3" Association="Self.FK__tbPhieuNh__accou__276EDEB3">
+            <End Role="tbTaiKhoan" EntitySet="tbTaiKhoan" />
+            <End Role="tbPhieuNhap" EntitySet="tbPhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbPhieuNh__produ__286302EC" Association="Self.FK__tbPhieuNh__produ__286302EC">
+            <End Role="tbNhaSanXuat" EntitySet="tbNhaSanXuat" />
+            <End Role="tbPhieuNhap" EntitySet="tbPhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbPhieuXu__accou__29572725" Association="Self.FK__tbPhieuXu__accou__29572725">
+            <End Role="tbTaiKhoan" EntitySet="tbTaiKhoan" />
+            <End Role="tbPhieuXuat" EntitySet="tbPhieuXuat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbPhieuXu__distr__2A4B4B5E" Association="Self.FK__tbPhieuXu__distr__2A4B4B5E">
+            <End Role="tbNhaPhanPhoi" EntitySet="tbNhaPhanPhoi" />
+            <End Role="tbPhieuXuat" EntitySet="tbPhieuXuat" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbQLKhoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="parentId" Type="Int32" />
+          <Property Name="url" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="index" Type="Int32" />
+          <Property Name="fontAwesome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK__Menu__parentId__21B6055D" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Menu2" Relationship="Self.FK__Menu__parentId__21B6055D" FromRole="Menu1" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="tbCT_PhieuNhap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ipBillId" Type="Int32" />
+          <Property Name="productId" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="priceCurrent" Type="Int32" />
+          <NavigationProperty Name="tbPhieuNhap" Relationship="Self.FK__tbCT_Phie__ipBil__22AA2996" FromRole="tbCT_PhieuNhap" ToRole="tbPhieuNhap" />
+          <NavigationProperty Name="tbHangHoa" Relationship="Self.FK__tbCT_Phie__produ__239E4DCF" FromRole="tbCT_PhieuNhap" ToRole="tbHangHoa" />
+        </EntityType>
+        <EntityType Name="tbCT_PhieuXuat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="opBillId" Type="Int32" />
+          <Property Name="productId" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="priceCurrent" Type="Int32" />
+          <NavigationProperty Name="tbPhieuXuat" Relationship="Self.FK__tbCT_Phie__opBil__24927208" FromRole="tbCT_PhieuXuat" ToRole="tbPhieuXuat" />
+          <NavigationProperty Name="tbHangHoa" Relationship="Self.FK__tbCT_Phie__produ__25869641" FromRole="tbCT_PhieuXuat" ToRole="tbHangHoa" />
+        </EntityType>
+        <EntityType Name="tbHangHoa">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="categoryId" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <NavigationProperty Name="tbCT_PhieuNhap" Relationship="Self.FK__tbCT_Phie__produ__239E4DCF" FromRole="tbHangHoa" ToRole="tbCT_PhieuNhap" />
+          <NavigationProperty Name="tbCT_PhieuXuat" Relationship="Self.FK__tbCT_Phie__produ__25869641" FromRole="tbHangHoa" ToRole="tbCT_PhieuXuat" />
+          <NavigationProperty Name="tbLoaiHangHoa" Relationship="Self.FK__tbHangHoa__categ__267ABA7A" FromRole="tbHangHoa" ToRole="tbLoaiHangHoa" />
+        </EntityType>
+        <EntityType Name="tbLoaiHangHoa">
+          <Key>
+            <PropertyRef Name="categoryId" />
+          </Key>
+          <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbHangHoas" Relationship="Self.FK__tbHangHoa__categ__267ABA7A" FromRole="tbLoaiHangHoa" ToRole="tbHangHoa" />
+        </EntityType>
+        <EntityType Name="tbNhaPhanPhoi">
+          <Key>
+            <PropertyRef Name="distributorId" />
+          </Key>
+          <Property Name="distributorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="distributorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="distributorAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="distributonTown" Type="Int32" />
+          <Property Name="distributonNumberPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbPhieuXuats" Relationship="Self.FK__tbPhieuXu__distr__2A4B4B5E" FromRole="tbNhaPhanPhoi" ToRole="tbPhieuXuat" />
+        </EntityType>
+        <EntityType Name="tbNhaSanXuat">
+          <Key>
+            <PropertyRef Name="producerId" />
+          </Key>
+          <Property Name="producerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="producerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="producerAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="producerTown" Type="Int32" />
+          <Property Name="producerNumberPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbPhieuNhaps" Relationship="Self.FK__tbPhieuNh__produ__286302EC" FromRole="tbNhaSanXuat" ToRole="tbPhieuNhap" />
+        </EntityType>
+        <EntityType Name="tbPhieuNhap">
+          <Key>
+            <PropertyRef Name="ipBillId" />
+          </Key>
+          <Property Name="ipBillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="priceTotal" Type="Int32" />
+          <Property Name="producerId" Type="Int32" />
+          <Property Name="accountId" Type="Int32" />
+          <Property Name="whatDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbCT_PhieuNhap" Relationship="Self.FK__tbCT_Phie__ipBil__22AA2996" FromRole="tbPhieuNhap" ToRole="tbCT_PhieuNhap" />
+          <NavigationProperty Name="tbNhaSanXuat" Relationship="Self.FK__tbPhieuNh__produ__286302EC" FromRole="tbPhieuNhap" ToRole="tbNhaSanXuat" />
+          <NavigationProperty Name="tbTaiKhoan" Relationship="Self.FK__tbPhieuNh__accou__276EDEB3" FromRole="tbPhieuNhap" ToRole="tbTaiKhoan" />
+        </EntityType>
+        <EntityType Name="tbPhieuXuat">
+          <Key>
+            <PropertyRef Name="opBillId" />
+          </Key>
+          <Property Name="opBillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="priceTotal" Type="Int32" />
+          <Property Name="accountId" Type="Int32" />
+          <Property Name="distributorId" Type="Int32" />
+          <Property Name="whatDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tbCT_PhieuXuat" Relationship="Self.FK__tbCT_Phie__opBil__24927208" FromRole="tbPhieuXuat" ToRole="tbCT_PhieuXuat" />
+          <NavigationProperty Name="tbNhaPhanPhoi" Relationship="Self.FK__tbPhieuXu__distr__2A4B4B5E" FromRole="tbPhieuXuat" ToRole="tbNhaPhanPhoi" />
+          <NavigationProperty Name="tbTaiKhoan" Relationship="Self.FK__tbPhieuXu__accou__29572725" FromRole="tbPhieuXuat" ToRole="tbTaiKhoan" />
+        </EntityType>
+        <EntityType Name="tbTaiKhoan">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="accountDate" Type="DateTime" Precision="0" />
+          <Property Name="accountSex" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="accountHometown" Type="Int32" />
+          <Property Name="accountNumberPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="accountAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="accountTown" Type="Int32" />
+          <Property Name="userName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="passWord" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="accountImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="accountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="tbPhieuNhaps" Relationship="Self.FK__tbPhieuNh__accou__276EDEB3" FromRole="tbTaiKhoan" ToRole="tbPhieuNhap" />
+          <NavigationProperty Name="tbPhieuXuats" Relationship="Self.FK__tbPhieuXu__accou__29572725" FromRole="tbTaiKhoan" ToRole="tbPhieuXuat" />
+        </EntityType>
+        <Association Name="FK__Menu__parentId__21B6055D">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="parentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCT_Phie__ipBil__22AA2996">
+          <End Role="tbPhieuNhap" Type="Self.tbPhieuNhap" Multiplicity="0..1" />
+          <End Role="tbCT_PhieuNhap" Type="Self.tbCT_PhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPhieuNhap">
+              <PropertyRef Name="ipBillId" />
+            </Principal>
+            <Dependent Role="tbCT_PhieuNhap">
+              <PropertyRef Name="ipBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCT_Phie__produ__239E4DCF">
+          <End Role="tbHangHoa" Type="Self.tbHangHoa" Multiplicity="0..1" />
+          <End Role="tbCT_PhieuNhap" Type="Self.tbCT_PhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbHangHoa">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="tbCT_PhieuNhap">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCT_Phie__opBil__24927208">
+          <End Role="tbPhieuXuat" Type="Self.tbPhieuXuat" Multiplicity="0..1" />
+          <End Role="tbCT_PhieuXuat" Type="Self.tbCT_PhieuXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPhieuXuat">
+              <PropertyRef Name="opBillId" />
+            </Principal>
+            <Dependent Role="tbCT_PhieuXuat">
+              <PropertyRef Name="opBillId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCT_Phie__produ__25869641">
+          <End Role="tbHangHoa" Type="Self.tbHangHoa" Multiplicity="0..1" />
+          <End Role="tbCT_PhieuXuat" Type="Self.tbCT_PhieuXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbHangHoa">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="tbCT_PhieuXuat">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbHangHoa__categ__267ABA7A">
+          <End Role="tbLoaiHangHoa" Type="Self.tbLoaiHangHoa" Multiplicity="0..1" />
+          <End Role="tbHangHoa" Type="Self.tbHangHoa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLoaiHangHoa">
+              <PropertyRef Name="categoryId" />
+            </Principal>
+            <Dependent Role="tbHangHoa">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbPhieuXu__distr__2A4B4B5E">
+          <End Role="tbNhaPhanPhoi" Type="Self.tbNhaPhanPhoi" Multiplicity="0..1" />
+          <End Role="tbPhieuXuat" Type="Self.tbPhieuXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNhaPhanPhoi">
+              <PropertyRef Name="distributorId" />
+            </Principal>
+            <Dependent Role="tbPhieuXuat">
+              <PropertyRef Name="distributorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbPhieuNh__produ__286302EC">
+          <End Role="tbNhaSanXuat" Type="Self.tbNhaSanXuat" Multiplicity="0..1" />
+          <End Role="tbPhieuNhap" Type="Self.tbPhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNhaSanXuat">
+              <PropertyRef Name="producerId" />
+            </Principal>
+            <Dependent Role="tbPhieuNhap">
+              <PropertyRef Name="producerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbPhieuNh__accou__276EDEB3">
+          <End Role="tbTaiKhoan" Type="Self.tbTaiKhoan" Multiplicity="0..1" />
+          <End Role="tbPhieuNhap" Type="Self.tbPhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTaiKhoan">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="tbPhieuNhap">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbPhieuXu__accou__29572725">
+          <End Role="tbTaiKhoan" Type="Self.tbTaiKhoan" Multiplicity="0..1" />
+          <End Role="tbPhieuXuat" Type="Self.tbPhieuXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbTaiKhoan">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="tbPhieuXuat">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbQLKho" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="tbCT_PhieuNhap" EntityType="Self.tbCT_PhieuNhap" />
+          <EntitySet Name="tbCT_PhieuXuat" EntityType="Self.tbCT_PhieuXuat" />
+          <EntitySet Name="tbHangHoas" EntityType="Self.tbHangHoa" />
+          <EntitySet Name="tbLoaiHangHoas" EntityType="Self.tbLoaiHangHoa" />
+          <EntitySet Name="tbNhaPhanPhois" EntityType="Self.tbNhaPhanPhoi" />
+          <EntitySet Name="tbNhaSanXuats" EntityType="Self.tbNhaSanXuat" />
+          <EntitySet Name="tbPhieuNhaps" EntityType="Self.tbPhieuNhap" />
+          <EntitySet Name="tbPhieuXuats" EntityType="Self.tbPhieuXuat" />
+          <EntitySet Name="tbTaiKhoans" EntityType="Self.tbTaiKhoan" />
+          <AssociationSet Name="FK__Menu__parentId__21B6055D" Association="Self.FK__Menu__parentId__21B6055D">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Menu1" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCT_Phie__ipBil__22AA2996" Association="Self.FK__tbCT_Phie__ipBil__22AA2996">
+            <End Role="tbPhieuNhap" EntitySet="tbPhieuNhaps" />
+            <End Role="tbCT_PhieuNhap" EntitySet="tbCT_PhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCT_Phie__produ__239E4DCF" Association="Self.FK__tbCT_Phie__produ__239E4DCF">
+            <End Role="tbHangHoa" EntitySet="tbHangHoas" />
+            <End Role="tbCT_PhieuNhap" EntitySet="tbCT_PhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCT_Phie__opBil__24927208" Association="Self.FK__tbCT_Phie__opBil__24927208">
+            <End Role="tbPhieuXuat" EntitySet="tbPhieuXuats" />
+            <End Role="tbCT_PhieuXuat" EntitySet="tbCT_PhieuXuat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCT_Phie__produ__25869641" Association="Self.FK__tbCT_Phie__produ__25869641">
+            <End Role="tbHangHoa" EntitySet="tbHangHoas" />
+            <End Role="tbCT_PhieuXuat" EntitySet="tbCT_PhieuXuat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbHangHoa__categ__267ABA7A" Association="Self.FK__tbHangHoa__categ__267ABA7A">
+            <End Role="tbLoaiHangHoa" EntitySet="tbLoaiHangHoas" />
+            <End Role="tbHangHoa" EntitySet="tbHangHoas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbPhieuXu__distr__2A4B4B5E" Association="Self.FK__tbPhieuXu__distr__2A4B4B5E">
+            <End Role="tbNhaPhanPhoi" EntitySet="tbNhaPhanPhois" />
+            <End Role="tbPhieuXuat" EntitySet="tbPhieuXuats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbPhieuNh__produ__286302EC" Association="Self.FK__tbPhieuNh__produ__286302EC">
+            <End Role="tbNhaSanXuat" EntitySet="tbNhaSanXuats" />
+            <End Role="tbPhieuNhap" EntitySet="tbPhieuNhaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbPhieuNh__accou__276EDEB3" Association="Self.FK__tbPhieuNh__accou__276EDEB3">
+            <End Role="tbTaiKhoan" EntitySet="tbTaiKhoans" />
+            <End Role="tbPhieuNhap" EntitySet="tbPhieuNhaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbPhieuXu__accou__29572725" Association="Self.FK__tbPhieuXu__accou__29572725">
+            <End Role="tbTaiKhoan" EntitySet="tbTaiKhoans" />
+            <End Role="tbPhieuXuat" EntitySet="tbPhieuXuats" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbQLKhoModelStoreContainer" CdmEntityContainer="dbQLKho">
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="dbQLKhoModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="parentId" ColumnName="parentId" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="index" ColumnName="index" />
+                <ScalarProperty Name="fontAwesome" ColumnName="fontAwesome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCT_PhieuNhap">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbCT_PhieuNhap">
+              <MappingFragment StoreEntitySet="tbCT_PhieuNhap">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ipBillId" ColumnName="ipBillId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="priceCurrent" ColumnName="priceCurrent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbCT_PhieuXuat">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbCT_PhieuXuat">
+              <MappingFragment StoreEntitySet="tbCT_PhieuXuat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="opBillId" ColumnName="opBillId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="priceCurrent" ColumnName="priceCurrent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbHangHoas">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbHangHoa">
+              <MappingFragment StoreEntitySet="tbHangHoa">
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbLoaiHangHoas">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbLoaiHangHoa">
+              <MappingFragment StoreEntitySet="tbLoaiHangHoa">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="categoryName" ColumnName="categoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbNhaPhanPhois">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbNhaPhanPhoi">
+              <MappingFragment StoreEntitySet="tbNhaPhanPhoi">
+                <ScalarProperty Name="distributorId" ColumnName="distributorId" />
+                <ScalarProperty Name="distributorName" ColumnName="distributorName" />
+                <ScalarProperty Name="distributorAddress" ColumnName="distributorAddress" />
+                <ScalarProperty Name="distributonTown" ColumnName="distributonTown" />
+                <ScalarProperty Name="distributonNumberPhone" ColumnName="distributonNumberPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbNhaSanXuats">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbNhaSanXuat">
+              <MappingFragment StoreEntitySet="tbNhaSanXuat">
+                <ScalarProperty Name="producerId" ColumnName="producerId" />
+                <ScalarProperty Name="producerName" ColumnName="producerName" />
+                <ScalarProperty Name="producerAddress" ColumnName="producerAddress" />
+                <ScalarProperty Name="producerTown" ColumnName="producerTown" />
+                <ScalarProperty Name="producerNumberPhone" ColumnName="producerNumberPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPhieuNhaps">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbPhieuNhap">
+              <MappingFragment StoreEntitySet="tbPhieuNhap">
+                <ScalarProperty Name="ipBillId" ColumnName="ipBillId" />
+                <ScalarProperty Name="priceTotal" ColumnName="priceTotal" />
+                <ScalarProperty Name="producerId" ColumnName="producerId" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="whatDate" ColumnName="whatDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPhieuXuats">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbPhieuXuat">
+              <MappingFragment StoreEntitySet="tbPhieuXuat">
+                <ScalarProperty Name="opBillId" ColumnName="opBillId" />
+                <ScalarProperty Name="priceTotal" ColumnName="priceTotal" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="distributorId" ColumnName="distributorId" />
+                <ScalarProperty Name="whatDate" ColumnName="whatDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTaiKhoans">
+            <EntityTypeMapping TypeName="dbQLKhoModel.tbTaiKhoan">
+              <MappingFragment StoreEntitySet="tbTaiKhoan">
+                <ScalarProperty Name="accountName" ColumnName="accountName" />
+                <ScalarProperty Name="accountDate" ColumnName="accountDate" />
+                <ScalarProperty Name="accountSex" ColumnName="accountSex" />
+                <ScalarProperty Name="accountHometown" ColumnName="accountHometown" />
+                <ScalarProperty Name="accountNumberPhone" ColumnName="accountNumberPhone" />
+                <ScalarProperty Name="accountAddress" ColumnName="accountAddress" />
+                <ScalarProperty Name="accountTown" ColumnName="accountTown" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="accountImage" ColumnName="accountImage" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

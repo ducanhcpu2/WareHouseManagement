@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "addProducer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using WarehouseManagerment.Models;
+@using WarehouseManagerment.Core.CSharp;
+@{
+    tbTaiKhoan acc = new tbTaiKhoan();
+    try
+    {
+        acc = (tbTaiKhoan)Session["user"];
+    }
+    catch
+    {
+        <script>
+            window.location.href = "../Account/Login";
+        </script>
+    }
+}
+<div class="myDesignTitle-0">
+    <div class="myDesignTitle-1">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>QUẢN LÝ Kho</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">QLKho</a></li>
+                            <li><a href="#">Nhà sản xuất</a></li>
+                            <li class="active">Thêm mới</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row edit-account " style="position:inherit;" id="edit-account">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="box-title">Thêm mới nhà sản xuất</h4>
+            </div>
+            <form action="/Producer/addProducer" method="post">
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <div class="profile">
+                            <div class="profile-body">
+                                <div class="row">
+                                    <div class="col-lg-12"><label for="inputSuccess2i" class="form-control-label">Tên nhà sản xuất:</label></div>
+                                    <div class="col-lg-12"><input type="text" name="producerName" class="form-control-success form-control form-account" value=""></div>
+                                </div>                                
+                                <div class="row">
+                                    <div class="col-lg-12"><label for="inputSuccess2i" class="form-control-label">Số điện thoại:</label></div>
+                                    <div class="col-lg-12"><input type="text" name="producerNumberPhone" class="form-control-success form-control form-account" value=""></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12"><label for="inputSuccess2i" class="form-account-label">Địa chỉ:</label></div>
+                                    <div class="col-lg-4">
+                                        <select data-placeholder="Chọn tỉnh" class="form-control-sm form-control form-account" id="city" onchange="changeCity();">
+                                            @{
+                                                <option value="" label="Chọn tỉnh"></option>
+                                                foreach (var item in WarehouseManagerment.Core.CSharp.AddressCore.getCityList())
+                                                {
+                                                    <option value="@item.MaTinh">@item.TenTinh</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <select data-placeholder="Chọn huyện" class="form-control-sm form-control form-account" id="district" onchange="changeDistrict()">
+                                            <option value="" label="Chọn huyện"></option>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <select name="producerTown" data-placeholder="Chọn xã" class="form-control-sm form-control form-account" id="town">
+                                            <option value="" label="Chọn Xã"></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-8" style="margin-top:15px;"><input type="text" name="producerAddress" id="address" class="form-control-success form-control form-account" value="@acc.accountAddress"></div>
+                                </div>
+
+                            </div>
+                            <div class="profile-footer">
+                                <button class="btn btn-success btn-sm" type="submit">Thêm</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div> <!-- /.row -->
+            </form>
+            <div class="card-body"></div>
+        </div>
+    </div><!-- /# column -->
+</div>
+<script>
+    function changeCity() {
+        address.changeCity('city', 'district');
+    }
+    function changeDistrict() {
+        address.changeDistrict('district', 'town');
+    }
+</script>
+

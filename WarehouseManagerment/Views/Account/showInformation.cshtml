@@ -1,0 +1,207 @@
+﻿@using WarehouseManagerment.Models
+@using WarehouseManagerment.Core.CSharp
+@{
+    ViewBag.Title = "showInformation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="myDesignTitle-0">
+    <div class="myDesignTitle-1">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>QUẢN LÝ KHO</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">QL Kho</a></li>
+                            <li><a href="#">Người dùng</a></li>
+                            <li class="active">Thông tin</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    tbTaiKhoan acc = new tbTaiKhoan();
+    try
+    {
+        acc = (tbTaiKhoan)Session["user"];
+    }
+    catch
+    {
+        <script>
+                                window.location.href = "../Account/Login";
+        </script>
+    }
+}
+<div class="row" id="show-account">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="box-title">Thông tin người dùng</h4>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="avatar-user">
+                        <img src="@acc.accountImage" class="rounded-circle" alt="Avatar"/>
+                    </div>
+                </div>
+                <div class="col-lg-7 ">
+                    <div class="profile">
+                        <div class="profile-header">
+                            <h1 class="account-name">
+                                @acc.accountName
+                            </h1>
+                        </div>
+                        <div class="profile-body">
+                            <div class="row">
+                                <div class="col-lg-4">Ngày sinh</div>
+                                <div class="col-lg-8">@acc.accountDate.GetValueOrDefault().ToString("dd/MM/yyyy")</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">Giới tính</div>
+                                <div class="col-lg-8">@acc.accountSex</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">Địa chỉ</div>
+                                <div class="col-lg-8">@acc.accountAddress, @AddressCore.getStrAddress(acc.accountTown.GetValueOrDefault())</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">Số điện thoại</div>
+                                <div class="col-lg-8">@acc.accountNumberPhone</div>
+                            </div>
+                        </div>
+                        <div class="profile-footer">
+                            <button class="btn btn-success btn-sm" onclick="openEditAccount()">Sửa thông tin</button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /.row -->
+            <div class="card-body"></div>
+        </div>
+    </div><!-- /# column -->
+</div>
+<div class="row edit-account display-none" style="position:inherit;" id="edit-account">
+    <div style="position:absolute;z-index:100;right:2%;" ><button class="my-close" onclick="closeEditAccount()"  type="button"><i class="fas fa-times"></i></button></div>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="box-title">Sửa thông tin người dùng</h4>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="avatar-user">
+                        <img src="@acc.accountImage" class="rounded-circle" height="311" width="311" alt="Avatar" id="srcImage" />                        
+                        <button type="button" id="select-image" class="btn btn-primary btn-sm " style="margin-left:33%;margin-top:15px;">Lấy ảnh</button>
+                    </div>
+                </div>
+                <div class="col-lg-7 ">
+                    <div class="profile">
+                        <div class="profile-body">
+                            <div class="row">
+                                <div class="col-lg-12"><label for="inputSuccess2i" class="form-control-label">Họ tên:</label></div>
+                                <div class="col-lg-8"><input type="text" id="name" class="form-control-success form-control form-account" value="@acc.accountName"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label for="inputSuccess2i" class="form-control-label">Ngày sinh:</label></div>
+                                <div class="col-lg-8"><input class="form-control form-account" id="date" name="date" placeholder="DD/MM/YYY" type="text" value="@acc.accountDate.GetValueOrDefault().ToString("dd/MM/yyyy")"/></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label for="inputSuccess2i" class="form-account-label">Giới tính:</label></div>
+                                <div class="col-lg-8">
+                                    <select name="selectSm" id="sex" class="form-control-sm form-control form-account">
+                                        @{
+                                            if (acc.accountSex.Equals("Nam"))
+                                            {
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nữ">Nữ</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="Nữ">Nữ</option>
+                                                <option value="Nam">Nam</option>
+                                            }
+                                        }
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            @*Start Address *@
+                            <div class="row">
+                                <div class="col-lg-12"><label for="inputSuccess2i" class="form-account-label">Địa chỉ:</label></div>
+                                <div class="col-lg-4">
+                                    <select data-placeholder="Chọn tỉnh" class="form-control-sm form-control form-account" id="city" onchange="address.changeCity('city','district')">
+                                        @{
+                                            <option value="" label="Chọn tỉnh"></option>
+                                            foreach (var item in WarehouseManagerment.Core.CSharp.AddressCore.getCityList())
+                                            {                                                
+                                                <option  value="@item.MaTinh">@item.TenTinh</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                    <select data-placeholder="Chọn huyện" class="form-control-sm form-control form-account"  id="district" onchange="address.changeDistrict('district', 'town')">
+                                        <option value="" label="Chọn huyện"></option>
+                                    </select>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <select data-placeholder="Chọn xã" class="form-control-sm form-control form-account"  id="town">
+                                        <option value="" label="Chọn Xã"></option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-8" style="margin-top:15px;"><input type="text" id="address" class="form-control-success form-control form-account" value="@acc.accountAddress"></div>
+                            </div>
+                            @* End Address *@
+                            <div class="row">
+                                <div class="col-lg-12"><label for="inputSuccess2i" class="form-control-label">Số điện thoại:</label></div>  
+                                <div class="col-lg-8"> <input type="text" id="phone" class="form-control-success form-control form-account" value="@acc.accountNumberPhone"></div>
+                            </div>
+                        </div>
+                        <div class="profile-footer">
+                            <button class="btn btn-success btn-sm" onclick="requestEditAccount()">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /.row -->
+            <div class="card-body"></div>
+        </div>
+    </div><!-- /# column -->
+</div>
+<!--Edit Account Information -->
+        <script>
+            function openEditAccount() {
+                jQuery(".edit-account").removeClass("display-none");
+                jQuery(".edit-account").addClass("display-block");
+                jQuery("#show-account").removeClass(" display-block");
+                jQuery("#show-account").addClass(" display-none");
+            }
+            function closeEditAccount() {
+                jQuery(".edit-account").removeClass("display-block");
+                jQuery(".edit-account").addClass("display-none");
+                jQuery("#show-account").removeClass(" display-none");
+                jQuery("#show-account").addClass(" display-block");
+            }
+            function requestEditAccount()
+            {
+                pData = { accountName: jQuery("#name").val(), accountDate: jQuery("#date").val(), accountSex: jQuery("#sex").val(), accountTown: jQuery("#town").val(), accountNumberPhone: jQuery("#phone").val(), accountAddress: jQuery("#address").val(), accountImage: jQuery("#srcImage").attr('src') };
+                request.put("POST", "/Account/changeInformation", pData, function (Response) {
+                    notify.call_save_1(Response.Response, "/Account/showInformation");
+                    setTimeout(function () {
+                        window.location.href = "/Account/showInformation";
+                    }, 5000);
+                }, function () { }, function () { });
+                    
+            }
+        </script>
+<!--Use Ckfinder-->

@@ -1,0 +1,1391 @@
+﻿@using WarehouseManagerment.Models
+@using WarehouseManagerment.Core.CSharp
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quản Lý Kho</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="../scripts/Admin/images/favicon.png">
+    <link rel="shortcut icon" href="../scripts/Admin/images/favicon.png">
+
+    <link rel="stylesheet" href="~/scripts/Admin/assets/css/normalize.css">
+    <link rel="stylesheet" href="~/scripts/Admin/assets/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="~/scripts/Admin/assets/css/font-awesome.min.css">
+    <link href="~/Scripts/fontawesome-free-5.6.3-web/css/fontawesome.css" rel="stylesheet" />*@
+    @*<link href="~/Scripts/fontawesome-free-5.6.3-web/css/fontawesome.min.css" rel="stylesheet" />*@
+    @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">*@
+    @*<link href="~/Scripts/fontawesome-free-5.6.3-web/css/all.min.css" rel="stylesheet" />*@
+    <link href="~/Scripts/fontawesome-mini/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/scripts/Admin/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/scripts/Admin/assets/css/pe-icon-7-filled.css">
+    <link href="~/scripts/Admin/assets/weather/css/weather-icons.css" rel="stylesheet" />
+    <link href="~/scripts/Admin/assets/calendar/fullcalendar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/scripts/Admin/assets/css/lib/datatable/dataTables.bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/scripts/Admin/assets/css/style.css">
+    <link href="~/scripts/Admin/assets/css/charts/chartist.min.css" rel="stylesheet">
+    <link href="~/scripts/Admin/assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
+    <!--For chọn địa chị nhưng giờ ko dùng-->
+    <link href="~/Scripts/Admin/assets/css/lib/chosen/chosen.min.css" rel="stylesheet" />
+    <!--Date time picker-->
+    <link href="~/Scripts/Datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <!--Notify-->
+
+
+    <style>
+        #weatherWidget .currentDesc {
+            color: #ffffff !important;
+        }
+
+        .traffic-chart {
+            min-height: 335px;
+        }
+
+        #flotPie1 {
+            height: 150px;
+        }
+
+            #flotPie1 td {
+                padding: 3px;
+            }
+
+            #flotPie1 table {
+                top: 20px !important;
+                right: -10px !important;
+            }
+
+        .chart-container {
+            display: table;
+            min-width: 270px;
+            text-align: left;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        #flotLine5 {
+            height: 105px;
+        }
+
+        #flotBarChart {
+            height: 150px;
+        }
+
+        #cellPaiChart {
+            height: 160px;
+        }
+        .header-left .form-inline{
+            position:fixed;
+            height:100%;
+            background-color:#fff;
+        }
+        .form-inline .search-close{
+            background: transparent;
+            border: none;
+            color: #131c21;
+            font-size: 16px;
+            position: absolute;
+            right: 0;
+            top: 11px;
+            margin-top: -14px !important;
+        }
+    </style>
+    <style>
+        .myDesignTitle-0 {
+            margin: 30px 0 30px 0;
+            width: 100%;
+        }
+
+        .myDesignTitle-1 {
+            background-color: #fff;
+        }
+        .avatar-user{
+            height:100%;
+            width:100%;
+            margin:10%;
+            margin-left:20%;
+        }
+        .profile{
+            margin-left:20%;
+        }
+        .profile-header,.profile-body{
+            margin-bottom:10%;
+        }   
+        .profile-footer{
+
+        }
+        .profile-footer button{
+            width:102px;
+        }
+        .profile-header .account-name{
+            font-size: 42px;
+            line-height: 42px;
+            text-transform: capitalize;
+            color: #444;
+        }
+        .profile-body .row{
+            margin-top:20px;
+
+        }
+        .form-account{
+           height: calc(1.8125rem + 2px);
+        }
+        .display-none{
+            display:none;
+        }
+        .display-block {
+            display: block;
+        }
+        .display-inline-block{
+            display:inline-block;            
+        }
+        .fs-13{
+            font-size:13px;
+            color:#435466;
+            margin-left:10px;
+            margin-bottom:.5rem;
+        }
+        .my-close{
+            background: transparent;
+            border: none;
+            color: #131c21;
+            font-size: 16px;
+            position: absolute;
+            right: 0;
+            top: 11px;
+            margin-top: -14px !important;
+                 }
+
+    </style>
+    <style>
+         .badge-complete {
+    background: #00c292;
+}
+         .badge-pending {
+    background: #fb9678;
+}
+ .badge {
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+.badge {
+    display: inline-block;
+    padding: .5em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+}
+    </style>
+    <style>
+        table.dataTable thead>tr>th.sorting_asc{
+            padding-right:25px;
+        }
+        .table td, .table th {
+            padding: .75rem 25px .75rem .75rem;
+            font-size:13px;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+    <!--Reader Style-->
+    <style>
+        .function {
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+            .function:hover {
+                font-size: 16px;
+            }
+
+        .function-eye {
+            color: #000;
+        }
+
+            .function-eye:hover {
+                color: #7f8c8d;
+            }
+    </style>
+</head>
+<body>
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    @*<li class="active">
+                        <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                    </li>*@
+                    @*<li class="menu-title">UI elements</li>*@<!-- /.menu-title -->
+                    @{
+                        var menuList = MenuCore.Get();
+                        foreach (var parrent in menuList)
+                        {
+                            <li class="menu-item-has-children dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon @parrent.fontAwesome"></i>@parrent.name</a>
+                                <ul class="sub-menu children dropdown-menu">
+                                    @{
+                                        foreach (var item in parrent.Menu1)
+                                        {
+                                            <li><i class="menu-icon @item.fontAwesome"></i><a href="@item.url">@item.name</a></li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    }                   
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+    <!-- Left Panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <header id="header" class="header">
+            <div class="top-left">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="../Home/Index"><img src="../scripts/Admin/images/logo.png" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./Home/Index"><img src="../scripts/Admin/images/logo2.png" alt="Logo"></a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+            <div class="top-right">
+                <div class="header-menu">
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fas fa-question-circle"></i></button>
+                        <div class="form-inline" style="overflow-y:auto;overflow-x:hidden;">
+                            <div class="row">
+                                <div class="card" style="width:100%!important;">
+                                    <div class="card-header">
+                                        <h4>Hướng dẫn sử dụng</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="default-tab">
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Tổng quan về hệ thống</a>
+                                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Mục QL Hàng Hóa</a>
+                                                    <a class="nav-item nav-link" id="nav-contact-tab-1" data-toggle="tab" href="#nav-contact-1" role="tab" aria-controls="nav-contact-1" aria-selected="false">Mục QL nhà sản xuất </a>
+                                                    <a class="nav-item nav-link" id="nav-contact-tab-2" data-toggle="tab" href="#nav-contact-2" role="tab" aria-controls="nav-contact-2" aria-selected="false">Mục QL nhà phân phối</a>
+                                                    <a class="nav-item nav-link" id="nav-contact-tab-3" data-toggle="tab" href="#nav-contact-3" role="tab" aria-controls="nav-contact-3" aria-selected="false">Mục QL nhập hàng</a>
+                                                    <a class="nav-item nav-link" id="nav-contact-tab-4" data-toggle="tab" href="#nav-contact-4" role="tab" aria-controls="nav-contact-4" aria-selected="false">Mục QL xuất hàng</a>
+                                                    <a class="nav-item nav-link" id="nav-contact-tab-5" data-toggle="tab" href="#nav-contact-5" role="tab" aria-controls="nav-contact-5" aria-selected="false">Mục Quản Lý Người Dùng</a>
+                                                </div>
+                                            </nav>
+                                            <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                    <p style="color:black;font-size:20px;margin-top:15px;margin-bottom:20px;"><b>Hệ thống quản lý kho hàng</b></p>
+                                                    <p style="color:black;font-size:13px;"> Hiện nay, công nghệ thông tin được xem là một ngành mũi nhọn của các quốc gia, đặc biệt là các quốc gia đang phát triển, tiến hành công nghiệp hóa và hiện đại hoá như nước ta. Sự bùng nổ thông tin và sự phát triển mạnh mẽ của công nghệ kỹ thuật số, yêu cầu muốn phát triển thì phải tin học hoá tất cả các ngành, các lĩnh vực. Cùng với sự phát triển nhanh chóng về phần cứng máy tính, các phần mềm ngày càng trở nên đa dạng, phong phú, hoàn thiện hơn và hỗ trợ hiệu quả cho con người. Các phần mềm hiện nay ngày càng mô phỏng được rất nhiều nghiệp vụ khó khăn, hỗ trợ cho người dùng thuận tiện sử dụng, thời gian xử lý nhanh chóng, và một số nghiệp vụ được tự động hoá cao. Do vậy mà trong việc phát triển phần mềm, sự đòi hỏi không chỉ là sự chính xác, xử lý được nhiều nghiệp vụ thực tế mà còn phải đáp ứng các yêu cầu khác như về tốc độ, giao diện thân thiện, mô hình hoá được thực tế vào máy tính để người sử dụng tiện lợi, quen thuộc, tính tương thích cao, bảo mật cao (đối với các dữ liệu nhạy cảm),… Các phần mềm giúp tiết kiệm một lượng lớn thời gian, công sức của con người, và tăng độ chính xác và hiệu quả trong công việc (nhất là việc sửa lỗi và tự động đồng bộ hoá). Ví dụ như việc quản lý nhập hàng số nhà sản xuất trong trường trung học phổ thông. Nếu không có sự hỗ trợ của tin học, việc quản lý này phải cần khá nhiều người, chia thành nhiều khâu, mới có thể quản lý được toàn bộ hồ sơ nhà sản xuất (thông tin, nhập hàng số, học bạ,…), nhà phân phối (sỉ số, giáo viên chủ nhiệm,…), giáo viên,… cũng như các nghiệp vụ tính nhập hàng trung bình, xếp loại học lực cho nhà sản xuất toàn trường (số lượng nhà sản xuất có thể lên đến hàng ngàn). Các công việc này đòi hỏi nhiều thời gian và công sức, mà sự chính xác và hiệu quả không cao, vì đa số đều làm bằng thủ công rất ít tự động. Một số nghiệp vụ như tra cứu, thống kê, và hiệu chỉnh thông tin khá vất vả. Ngoài ra còn có một số khó khăn về vấn đề lưu trữ khá đồ sộ, dễ bị thất lạc, tốn kém,… Trong khi đó, các nghiệp vụ này hoàn toàn có thể tin học hoá một cách dễ dàng. Với sự giúp đỡ của tin học, việc quản lý học vụ sẽ trở nên đơn giản, thuận tiện, nhanh chóng và hiệu quả hơn rất nhiều.</p>
+                                                    <p style="color:black;font-size:13px;"> Các phần mềm giúp tiết kiệm một lượng lớn thời gian, công sức của con người, và tăng độ chính xác và hiệu quả trong công việc (nhất là việc sửa lỗi và tự động đồng bộ hoá). Ví dụ như việc quản lý  nhà sản xuất và giáo viên trong trường trung học phổ thông. Nếu không có sự hỗ trợ của tin học, việc quản lý này phải cần khá nhiều người, chia thành nhiều khâu, mới có thể quản lý được toàn bộ hồ sơ nhà sản xuất (thông tin, nhập hàng số, học bạ,…), nhà phân phối (sĩ số, giáo viên chủ nhiệm,…), giáo viên,… cũng như các nghiệp vụ tính nhập hàng trung bình, xếp loại học lực cho nhà sản xuất toàn trường (số lượng nhà sản xuất có thể lên đến hàng ngàn). Các công việc này đòi hỏi nhiều thời gian và công sức, mà sự chính xác và hiệu quả không cao, vì đa số đều làm bằng thủ công rất ít tự động. Một số nghiệp vụ như tra cứu, thống kê, và hiệu chỉnh thông tin khá vất vả. Ngoài ra còn có một số khó khăn về vấn đề lưu trữ khá đồ sộ, dễ bị thất lạc, tốn kém,… Trong khi đó, các nghiệp vụ này hoàn toàn có thể tin học hoá một cách dễ dàng. Với sự giúp đỡ của tin học, việc quản lý học vụ sẽ trở nên đơn giản, thuận tiện, nhanh chóng và hiệu quả hơn rất nhiều.</p>
+                                                    <div class="row">
+                                                        <div class="col-lg-9">
+
+                                                            <img src="~/Data/images/giao_dien.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <p style="color:black;font-size:13px;">Hệ thống cung cấp các chức năng:</p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Quản lý hàng hóa
+                                                                    <ul style="padding-left:20px;">
+                                                                        <li>Thêm mới hàng hóa</li>
+                                                                        <li>Danh sách hàng hóa</li>
+                                                                        <li>Xem chi tiết thông tin hàng hóa</li>
+                                                                        <li>Chỉnh sửa thông tin hàng hóa</li>
+                                                                        <li>Xóa bỏ thông tin hàng hóa</li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Quản lý nhà sản xuất
+                                                                    <ul style="padding-left:20px;">
+                                                                        <li>Thêm mới nhà sản xuất</li>
+                                                                        <li>Danh sách nhà sản xuất</li>
+                                                                        <li>Xem chi tiết thông tin nhà sản xuất</li>
+                                                                        <li>Chỉnh sửa thông tin nhà sản xuất</li>
+                                                                        <li>Xóa bỏ thông tin nhà sản xuất</li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Quản lý nhà phân phối
+                                                                    <ul style="padding-left:20px;">
+                                                                        <li>Thêm mới nhà phân phối</li>
+                                                                        <li>Danh sách nhà phân phối</li>
+                                                                        <li>Xem chi tiết thông tin nhà phân phối</li>
+                                                                        <li>Chỉnh sửa thông tin nhà phân phối</li>
+                                                                        <li>Xóa bỏ thông tin nhà phân phối</li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Quản lý nhập hàng
+                                                                    <ul style="padding-left:20px;">
+                                                                        <li>Thêm mới phiếu nhập</li>
+                                                                        <li>Danh sách phiếu nhậpi</li>
+                                                                        <li>Xem chi tiết thông tin phiếu nhập</li>
+                                                                        <li>Chỉnh sửa thông tin phiếu nhập</li>
+                                                                        <li>Xóa bỏ thông tin phiếu nhập</li>
+                                                                    </ul>
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Quản lý người dùng
+                                                                    <ul style="padding-left:20px;">
+                                                                        <li>Đăng nhập</li>
+                                                                        <li>Đăng xuất</li>
+                                                                        <li>Chỉnh sửa thông tin người dùng</li>
+                                                                        <li>Đổi mật khẩu người dùng</li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                                    <p style="color:black;font-size:20px;margin-top:15px;margin-bottom:20px;"><b>Mục quản lý hàng hóa</b></p>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p style="color:black;font-size:13px;"><b>Mục này cung cấp các chức năng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Thêm giáo hàng hóa mới
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Sửa thông tin hàng hóa
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem danh sách hàng hóa
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem chi tiết hàng hóa
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xóa thông tin hàng hóa
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/product/them_hang_hoa.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng thêm mới :</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">hàng hóa</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Thêm hàng hóa</b>"
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhập thông tin theo mẫu
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Thêm</b>" trên giao diện
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/product/danh_sach_hang_hoa.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng danh sách hàng hóa</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">hàng hóa</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Danh sách hàng hóa</b>"
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:30px;">
+                                                        <div class="col-lg-8">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/product/chi_tiet_hang_hoa.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/product/sua_hang_hoa.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/product/xoa_hang_hoa.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng nhóm chức năng xem chi tiết, sửa, xóa thông tin hàng hóa:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Từ trang danh sách hàng hóa
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Di chuyển chuột tới vị trí sách cần xem
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Xem</b>" | "<b style="font-size:12px;">Sửa</b>" | "<b style="font-size:12px;">Xóa</b>" tương ứng với mục đích
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-contact-1" role="tabpanel" aria-labelledby="nav-contact-tab-1">
+                                                    <p style="color:black;font-size:20px;margin-top:15px;margin-bottom:20px;"><b>Mục quản lý nhà sản xuất</b></p>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p style="color:black;font-size:13px;"><b>Mục này cung cấp các chức năng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Thêm nhà sản xuất mới
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Sửa thông tin nhà sản xuất
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem chi tiết danh sách nhà sản xuất
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem chi tiết nhà sản xuất
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xóa thông tin nhà sản xuất
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/producer/them_nsx.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng thêm mới nhà sản xuất:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">nhà sản xuất</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Thêm nhà sản xuất</b>"
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhập thông tin theo mẫu
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Thêm</b>" trên giao diện
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/producer/danh_sach_nsx.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng xem danh sách nhà sản xuất</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">nhà sản xuất</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Danh sách nhà sản xuất</b>"
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:30px;">
+                                                        <div class="col-lg-8">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/producer/chi_tiet_nsx.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/producer/sua_nsx.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/producer/xoa_nsx.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng nhóm chức năng xem chi tiết, sửa, xóa thông tin nhà sản xuất:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Từ trang danh sách nhà sản xuất
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Di chuyển chuột tới vị trí sách cần xem
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Xem</b>" | "<b style="font-size:12px;">Sửa</b>" | "<b style="font-size:12px;">Xóa</b>" tương ứng với mục đích
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="tab-pane fade" id="nav-contact-2" role="tabpanel" aria-labelledby="nav-contact-tab-2">
+                                                    <p style="color:black;font-size:20px;margin-top:15px;margin-bottom:20px;"><b>Mục quản lý nhà phân phối</b></p>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p style="color:black;font-size:13px;"><b>Mục này cung cấp các chức năng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Thêm mới nhà phân phối
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Sửa thông tin nhà phân phối
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem chi tiết thông tin nhà phân phối
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Sửa thông tin nhà phân phối
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xóa thông tin nhà phân phối
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/distributor/them_npp.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng thêm mới nhà phân phối:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">nhà phân phối</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Thêm nhà phân phối</b>"
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhập thông tin theo mẫu
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Thêm</b>" trên giao diện
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/distributor/danh_sach_npp.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng danh sách nhà phân phối:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">nhà phân phối</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Danh sách nhà phân phối</b>"
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:30px;">
+                                                        <div class="col-8">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/distributor/chi_tiet_npp.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/distributor/sua_npp.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/distributor/xoa_npp.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng nhóm chức năng xem chi tiết, sửa, xóa thông tin nhà phân phối:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Từ trang danh sách nhà phân phối
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Di chuyển chuột tới vị trí nhà phân phối cần xem
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào ký tự "<b style="font-size:12px;">Xem</b>" | "<b style="font-size:12px;">Sửa</b>" | "<b style="font-size:12px;">Xóa</b>" tương ứng với mục đích
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-contact-3" role="tabpanel" aria-labelledby="nav-contact-tab-3">
+                                                    <p style="color:black;font-size:20px;margin-top:15px;margin-bottom:20px;"><b>Mục quản lý nhập hàng</b></p>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p style="color:black;font-size:13px;"><b>Mục này cung cấp các chức năng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Thêm nhập hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Sửa thông tin nhập hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem chi tiết danh sách nhập hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem chi tiết nhập hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xóa thông tin nhập hàng
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/IpBill/them_moi_nh.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng thêm mới nhập hàng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">nhập hàng</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Thêm nhập hàng</b>"
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhập thông tin theo mẫu
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Thêm</b>" trên giao diện
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/IpBill/danh_sach_hh.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng danh nhập hàng</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">nhập hàng</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Danh sách nhập hàng</b>"
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:30px;">
+                                                        <div class="col-lg-8">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/IpBill/chi_tiet_pn.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/IpBill/sưa_pn.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/IpBill/danh_sach_hh.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng nhóm chức năng xem chi tiết, sửa, xóa thông tin nhập hàng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Từ trang danh sách nhập hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Di chuyển chuột tới vị trí sách cần xem
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Xem</b>" | "<b style="font-size:12px;">Sửa</b>" | "<b style="font-size:12px;">Xóa</b>" tương ứng với mục đích
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-contact-4" role="tabpanel" aria-labelledby="nav-contact-tab-4">
+                                                    <p style="color:black;font-size:20px;margin-top:15px;margin-bottom:20px;"><b>Mục quản lý xuất hàng</b></p>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p style="color:black;font-size:13px;"><b>Mục này cung cấp các chức năng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Thêm xuất hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Sửa thông tin xuất hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem chi tiết danh sách xuất hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem chi tiết xuất hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xóa thông tin xuất hàng
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/OpBill/them_moi_xh.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng thêm mới xuất hàng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">xuất hàng</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Thêm xuất hàng</b>"
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhập thông tin theo mẫu
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Thêm</b>" trên giao diện
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/OpBill/danh_sach_xh.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng danh sách xuất hàng</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">xuất hàng</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Danh sách xuất hàng</b>"
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:30px;">
+                                                        <div class="col-lg-8">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/OpBill/chi_tiet_xh.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/OpBill/sua_xh.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <img src="~/Data/images/OpBill/danh_sach_xh.png" style="border:solid 1px #ddd;" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng nhóm chức năng xem chi tiết, sửa, xóa thông tin xuất hàng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Từ trang danh sách xuất hàng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Di chuyển chuột tới vị trí sách cần xem
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào nút "<b style="font-size:12px;">Xem</b>" | "<b style="font-size:12px;">Sửa</b>" | "<b style="font-size:12px;">Xóa</b>" tương ứng với mục đích
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav-contact-5" role="tabpanel" aria-labelledby="nav-contact-tab-5">
+                                                    <p style="color:black;font-size:20px;margin-top:15px;margin-bottom:20px;"><b>Mục quản lý người dùng</b></p>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <p style="color:black;font-size:13px;"><b>Mục này cung cấp các chức năng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Xem thông tin người dùng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Sửa thông tin người dùng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Đổi mật khẩu tài khoản người dùng
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Đăng xuất
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/account/thong_tin.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng xem thông tin người dùng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">Người dùng</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Thông tin</b>"
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/account/sua_thong_tin.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng sửa thông tin người dùng:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Tại giao diện xem thông tin người dùng nhấn nút "<b style="font-size:12px;">Sửa thông tin</b>"
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Thay đổi thông tin theo form
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn nút <b style="font-size:12px;">Xác nhận</b>
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+                                                            <img src="~/Data/images/account/doi_pass.png" style="border:solid 1px #ddd;" />
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng đổi mật khẩu:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">Người dùng</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Đổi mật khẩu</b>"
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhập mật khẩu cũ và mới
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Xác nhận</b>"
+                                                                </li>
+
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:40px;">
+                                                        <div class="col-lg-8">
+
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <p style="color:black;font-size:13px;"><b>Hướng dẫn sử dụng chức năng đăng xuất:</b></p>
+                                                            <ol style="color:black;font-size:13px;padding-left:40px;">
+                                                                <li style="padding-bottom:5px;">
+                                                                    Nhấn vào mục "<b style="font-size:12px;">Người dùng</b>" trên danh sách menu của trang.
+                                                                </li>
+                                                                <li style="padding-bottom:5px;">
+                                                                    Chọn mục "<b style="font-size:12px;">Đăng xuất</b>"
+                                                                </li>
+                                                            </ol>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="search-close" type="submit"><i class="fas fa-times"></i></button>
+
+                    </div>
+                    @{
+                        tbTaiKhoan acc = new tbTaiKhoan();
+                        if ((tbTaiKhoan)Session["user"] != null)
+                        {
+                            acc = (tbTaiKhoan)Session["user"];
+                        }
+                        else
+                        {
+                            <script>
+                                window.location.href = "../Account/Login";
+                            </script>
+                        }
+
+                    }
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="@acc.accountImage" alt="User Avatar">
+                        </a>
+                        <div class="user-menu dropdown-menu">
+                            @{ 
+                            }
+                            <a class="nav-link" href="/Account/showInformation"><i class="fa fa-user"></i>Tài khoản</a>
+
+                            <a class="nav-link" href="../Account/Login"><i class="fa fa-power-off"></i>Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header><!-- /header -->
+        <!-- Header-->
+
+
+        <div class="content pb-0">
+            @RenderBody()
+        </div> <!-- .content -->
+
+
+
+        <div class="clearfix"></div>
+
+        <footer class="site-footer">
+            <div class="footer-inner bg-white">
+                <div class="row">
+                    <div class="col-sm-6">
+                        Copyright &copy; 2019 NTHCompany
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        Designed by <a href="https://colorlib.com">LongJker</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div><!-- /#right-panel -->
+    
+    
+    <script src="~/scripts/Admin/assets/js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/popper.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/plugins.js"></script>
+    <script src="~/scripts/Admin/assets/js/main.js"></script>
+    <script src="~/Scripts/Admin/assets/js/lib/chosen/chosen.jquery.min.js"></script>
+    
+
+    <script src="~/scripts/Admin/assets/js/lib/chart-js/Chart.bundle.js"></script>
+
+
+    <!--Chartist Chart-->
+    <script src="~/scripts/Admin/assets/js/lib/chartist/chartist.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/chartist/chartist-plugin-legend.js"></script>
+    <!--Start Table-->
+    <script src="~/scripts/Admin/assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/jszip.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/data-table/datatables-init.js"></script>
+
+
+    
+    <!--End Table-->
+    <script src="~/scripts/Admin/assets/js/lib/flot-chart/jquery.flot.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/flot-chart/jquery.flot.pie.js"></script>
+    <script src="~/scripts/Admin/assets/js/lib/flot-chart/jquery.flot.spline.js"></script>
+
+
+    <script src="~/scripts/Admin/assets/weather/js/jquery.simpleWeather.min.js"></script>
+    <script src="~/scripts/Admin/assets/weather/js/weather-init.js"></script>
+
+
+    <script src="~/scripts/Admin/assets/js/lib/moment/moment.js"></script>
+    <script src="~/scripts/Admin/assets/calendar/fullcalendar.min.js"></script>
+    <script src="~/scripts/Admin/assets/calendar/fullcalendar-init.js"></script>
+
+
+    <script src="~/Core/JavaScript/JsController.js"></script>
+    <script src="~/Core/JavaScript/JsNotify.js"></script>
+    <script src="~/Core/JavaScript/JsAddress.js"></script>
+    <!--Notify-->
+    <script src="~/Core/JavaScript/Notify/bootstrap-notify.js"></script>
+    <!--Date time picker-->
+    <script src="~/Scripts/Datepicker/js/bootstrap-datepicker.min.js"></script>
+    <!--Mustache-->
+    <script src="~/Core/JavaScript/Mustache/mustache.min.js"></script>
+    <!--Pagination-->
+    <script src="~/Core/JavaScript/Pagination/pagination.min.js"></script>
+    <!--Ckfinder-->
+    <script src="~/Core/JavaScript/plugins/ckfinder/ckfinder.js"></script>
+    <!--barChart-->
+    <script src="~/Scripts/Admin/assets/js/lib/chart-js/Chart.bundle.js"></script>
+    <!--Import from showInfromation.cshtml-->    
+    @RenderSection("jsshowBook", required: false)
+    @RenderSection("jsAddBook", required: false)
+
+    <div id="container">
+
+
+
+    </div>
+
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict";
+            // Pie chart flotPie1
+            //var piedata = [
+            //    { label: "Desktop visits", data: [[1,32]], color: '#5c6bc0'},
+            //    { label: "Tab visits", data: [[1,33]], color: '#ef5350'},
+            //    { label: "Mobile visits", data: [[1,35]], color: '#66bb6a'}
+            //];
+
+            //$.plot('#flotPie1', piedata, {
+            //    series: {
+            //        pie: {
+            //            show: true,
+            //            radius: 1,
+            //            innerRadius: 0.65,
+            //            label: {
+            //                show: true,
+            //                radius: 2/3,
+            //                threshold: 1
+            //            },
+            //            stroke: {
+            //                width: 0
+            //            }
+            //        }
+            //    },
+            //    grid: {
+            //        hoverable: true,
+            //        clickable: true
+            //    }
+            //});
+
+            //// Pie chart flotPie1  End
+
+
+
+
+            //var cellPaiChart = [
+            //    { label: "Direct Sell", data: [[1,65]], color: '#5b83de'},
+            //    { label: "Channel Sell", data: [[1,35]], color: '#00bfa5'}
+            //];
+            //$.plot('#cellPaiChart', cellPaiChart, {
+            //    series: {
+            //        pie: {
+            //            show: true,
+            //            stroke: {
+            //                width: 0
+            //            }
+            //        }
+            //    },
+            //    legend: {
+            //        show: false
+            //    },grid: {
+            //        hoverable: true,
+            //        clickable: true
+            //    }
+
+            //});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //// Line Chart  #flotLine5
+            //var newCust = [[0, 3], [1, 5], [2,4], [3, 7], [4, 9], [5, 3], [6, 6], [7, 4], [8, 10]];
+
+            //var plot = $.plot($('#flotLine5'),[{
+            //    data: newCust,
+            //    label: 'New Data Flow',
+            //    color: '#fff'
+            //}],
+            //{
+            //    series: {
+            //        lines: {
+            //            show: true,
+            //            lineColor: '#fff',
+            //            lineWidth: 2
+            //        },
+            //        points: {
+            //            show: true,
+            //            fill: true,
+            //            fillColor: "#ffffff",
+            //            symbol: "circle",
+            //            radius: 3
+            //        },
+            //        shadowSize: 0
+            //    },
+            //    points: {
+            //        show: true,
+            //    },
+            //    legend: {
+            //        show: false
+            //    },
+            //    grid: {
+            //        show: false
+            //    }
+            //});
+
+             // Line Chart  #flotLine5 End
+
+
+
+            //Barchart
+            
+
+
+            // Traffic Chart using chartist
+            if ($('#traffic-chart').length) {
+                var chart = new Chartist.Line('#traffic-chart', {
+                  labels: ['Khối', 'Khối 10', 'Khối 11','Khối 12'],
+                  series: [
+                  [0, 18000, 35000,  25000],
+                  [0, 33000, 15000,  20000],
+                  [0, 15000, 28000,  15000]
+                  ]
+              }, {
+                  low: 0,
+                  showArea: true,
+                  showLine: false,
+                  showPoint: false,
+                  fullWidth: true,
+                  axisX: {
+                    showGrid: true
+                }
+            });
+
+                chart.on('draw', function(data) {
+                    if(data.type === 'line' || data.type === 'area') {
+                        data.element.animate({
+                            d: {
+                                begin: 2000 * data.index,
+                                dur: 2000,
+                                from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                                to: data.path.clone().stringify(),
+                                easing: Chartist.Svg.Easing.easeOutQuint
+                            }
+                        });
+                    }
+                });
+            }
+            // Traffic Chart using chartist End
+            // Traffic Chart version 2 using chartist Start
+            if ($('#traffic-chart-2').length) {
+                var chart = new Chartist.Line('#traffic-chart-2', {
+                    labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5'],
+                    series: [
+                    [0, 18000, 35000, 25000, 22000, 0],
+                    [0, 33000, 15000, 20000, 15000, 300],
+                    [0, 15000, 28000, 15000, 30000, 5000]
+                    ]
+                }, {
+                    low: 0,
+                    showArea: true,
+                    showLine: false,
+                    showPoint: false,
+                    fullWidth: true,
+                    axisX: {
+                        showGrid: true
+                    }
+                });
+
+                chart.on('draw', function (data) {
+                    if (data.type === 'line' || data.type === 'area') {
+                        data.element.animate({
+                            d: {
+                                begin: 2000 * data.index,
+                                dur: 2000,
+                                from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                                to: data.path.clone().stringify(),
+                                easing: Chartist.Svg.Easing.easeOutQuint
+                            }
+                        });
+                    }
+                });
+            }
+            // Traffic Chart version 2 using chartist End
+
+
+            //Traffic chart chart-js
+            if ($('#TrafficChart').length) {
+                var ctx = document.getElementById( "TrafficChart" );
+                ctx.height = 150;
+                var myChart = new Chart( ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
+                        datasets: [
+                        {
+                            label: "Visit",
+                            borderColor: "rgba(4, 73, 203,.09)",
+                            borderWidth: "1",
+                            backgroundColor: "rgba(4, 73, 203,.5)",
+                            data: [ 0, 2900, 5000, 3300, 6000, 3250, 0 ]
+                        },
+                        {
+                            label: "Bounce",
+                            borderColor: "rgba(245, 23, 66, 0.9)",
+                            borderWidth: "1",
+                            backgroundColor: "rgba(245, 23, 66,.5)",
+                            pointHighlightStroke: "rgba(245, 23, 66,.5)",
+                            data: [ 0, 4200, 4500, 1600, 4200, 1500, 4000 ]
+                        },
+                        {
+                            label: "Targeted",
+                            borderColor: "rgba(40, 169, 46, 0.9)",
+                            borderWidth: "1",
+                            backgroundColor: "rgba(40, 169, 46, .5)",
+                            pointHighlightStroke: "rgba(40, 169, 46,.5)",
+                            data: [1000, 5200, 3600, 2600, 4200, 5300, 0 ]
+                        }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        }
+
+                    }
+                } );
+            }
+            //Traffic chart chart-js  End
+
+
+
+            // Bar Chart #flotBarChart
+            //$.plot("#flotBarChart", [{
+            //    data: [[0, 18], [2, 8], [4, 5], [6, 13],[8,5], [10,7],[12,4], [14,6],[16,15], [18, 9],[20,17], [22,7],[24,4], [26,9],[28,11]],
+            //    bars: {
+            //        show: true,
+            //        lineWidth: 0,
+            //        fillColor: '#ffffff8a'
+            //    }
+            //}], {
+            //    grid: {
+            //        show: false
+            //    }
+            //});
+            // Bar Chart #flotBarChart End
+            //Date picker
+            
+            //End date picker
+        });  // End of Document Ready
+    </script>    
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict";
+            var date_input = $('input[name="date"]'); //our date input has the name "date"
+            var publish_year = $('#publish-year');
+            var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            var options = {
+                format: 'dd/mm/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+            };
+            date_input.datepicker(options);
+            $('#NgaySinh').datepicker(options);
+            $('#whatDate').datepicker(options);
+            $('#paymentTerm').datepicker(options);
+            $('#returnDay').datepicker(options);
+            publish_year.datepicker({
+                format: 'yyyy',
+                viewMode: "years",
+                minViewMode: "years",
+                autoClose: true
+            });
+        });
+    </script>
+    @*<script>
+
+        jQuery(document).ready(function () {
+            jQuery(".standardSelect").chosen({
+                disable_search_threshold: 10,
+                no_results_text: "Oops, nothing found!",
+                width: "100%"
+            });
+        });
+
+    </script>*@
+    <!--ckfinder-->
+    <script>
+        jQuery("#select-image").on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                jQuery('#txt-Image').val(url);
+                jQuery('#srcImage').attr("src", url);
+            };
+            finder.popup();
+        });
+    </script>
+    <!--Data table-->
+    @*<script type="text/javascript">
+        $(document).ready(function() {
+          $('#bootstrap-data-table-export').DataTable();
+      } );
+    </script>*@
+    <!--Function on table-->
+    <script>
+        function redirectToLink(url)
+        {
+            window.location.href=url;
+        }
+    </script>
+    <script>
+        jQuery('#bootstrap-data-table-2').DataTable({
+            lengthMenu: [[10, 20, 50, -1], [10, 20, 50, "All"]],
+        });
+    </script>
+    <script>
+        function changeFollow(id,category,c, d, t) {
+            var n = jQuery('input[name="' + id + '"]').val();
+            if (category == 1)
+            {
+                var c = c == undefined ? "" : c,
+                              d = d == undefined ? "." : d,
+                              t = t == undefined ? "," : t,
+                              s = n < 0 ? "-" : "",
+                              i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+                              j = (j = i.length) > 3 ? j % 3 : 0;
+
+                jQuery("#" + id).html(s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (0 ? d + Math.abs(n - i).toFixed(0).slice(2) : "") + "<sup>" + c + "</sup>");
+            }
+            else {
+                jQuery("#" + id).html(n);
+            }
+        };
+
+        
+    </script>
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

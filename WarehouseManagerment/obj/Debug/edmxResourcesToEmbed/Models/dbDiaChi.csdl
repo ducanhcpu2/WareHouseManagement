@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbDiaChiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbHuyen_">
+    <Key>
+      <PropertyRef Name="MaHuyen" />
+    </Key>
+    <Property Name="MaHuyen" Type="Int32" Nullable="false" />
+    <Property Name="TenHuyen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LoaiHuyen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ToaDo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MaTinh" Type="Int32" />
+    <Property Name="ViTri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="tbTinh_">
+    <Key>
+      <PropertyRef Name="MaTinh" />
+    </Key>
+    <Property Name="MaTinh" Type="Int32" Nullable="false" />
+    <Property Name="TenTinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LoaiTinh" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ViTri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="tbXa_">
+    <Key>
+      <PropertyRef Name="MaXa" />
+    </Key>
+    <Property Name="MaXa" Type="Int32" Nullable="false" />
+    <Property Name="TenXa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LoaiXa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ToaDo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MaHuyen" Type="Int32" />
+    <Property Name="ViTri" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityContainer Name="dbDiaChi" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbHuyen_" EntityType="Self.tbHuyen_" />
+    <EntitySet Name="tbTinh_" EntityType="Self.tbTinh_" />
+    <EntitySet Name="tbXa_" EntityType="Self.tbXa_" />
+  </EntityContainer>
+</Schema>
