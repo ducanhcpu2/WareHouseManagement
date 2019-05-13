@@ -20,16 +20,17 @@ namespace WarehouseManagerment.Controllers
         [HttpPost]
         public ActionResult addOpBill(tbPhieuXuat OpBill, string[] amount, string[] priceCurrent, string[] productId)
         {
-            Nullable<int> total_price = 0;
+            //Nullable<int> total_price = 0;
             tbCT_PhieuXuat[] array = new tbCT_PhieuXuat[amount.Length];
             for (int i = 0; i < amount.Length; i++)
             {
                 array[i] = new tbCT_PhieuXuat { amount = Convert.ToInt32(amount[i]), priceCurrent = Convert.ToInt32(priceCurrent[i]), productId = Convert.ToInt32(productId[i]) };
-                total_price = total_price + array[i].amount * array[i].priceCurrent;
+                //total_price = total_price + array[i].amount * array[i].priceCurrent;
             }
             tbTaiKhoan user = (tbTaiKhoan)Session["user"];
             OpBill.accountId = user.accountId;
-            OpBill.priceTotal = total_price;
+            //OpBill.priceTotal = total_price;
+            OpBill.priceTotal = 0;
             OpBillCore.Post(OpBill, array);
             return RedirectToAction("showOpBills");
         }
