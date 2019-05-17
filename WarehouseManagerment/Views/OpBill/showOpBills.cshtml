@@ -130,7 +130,7 @@
     }
     function requestDeleteReader() {
         closeModal();
-        pData = { IpBillId: currentId };
+        pData = { OpBillId: currentId };
         request.put("POST", "/OpBill/deleteOpBill", pData, function (Response) {
             if (Response == true)
             {

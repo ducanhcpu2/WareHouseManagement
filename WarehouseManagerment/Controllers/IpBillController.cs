@@ -10,6 +10,7 @@ namespace WarehouseManagerment.Controllers
 {
     public class IpBillController : Controller
     {
+        dbQLKho db =new dbQLKho();
         public ActionResult addIpBill()
         {
             ViewBag.ProducerList = ProducerCore.Get();
@@ -19,16 +20,13 @@ namespace WarehouseManagerment.Controllers
         [HttpPost]
         public ActionResult addIpBill(tbPhieuNhap IpBill, string[] amount,string[] priceCurrent, string[] productId)
         {
-            //Nullable<int> total_price = 0;
             tbCT_PhieuNhap[] array = new tbCT_PhieuNhap[amount.Length];
             for(int i=0;i<amount.Length;i++)
             {
                 array[i] = new tbCT_PhieuNhap { amount = Convert.ToInt32(amount[i]), priceCurrent = Convert.ToInt32(priceCurrent[i]), productId = Convert.ToInt32(productId[i]) };
-                //total_price = total_price + array[i].amount * array[i].priceCurrent;
             }
             tbTaiKhoan user = (tbTaiKhoan)Session["user"];
             IpBill.accountId = user.accountId;
-            //IpBill.priceTotal = total_price;
             IpBill.priceTotal = 0;
             IpBillCore.Post(IpBill,array);
             return RedirectToAction("showIpBills");
@@ -48,21 +46,33 @@ namespace WarehouseManagerment.Controllers
         [HttpPost]
         public ActionResult editIpBill(tbPhieuNhap IpBill,int[] id,int [] productId,int[] amount,int[] priceCurrent)
         {
+
             IpBillCore.Put(IpBill);
             try
             {
                 int j = 0;
-                for(int i=0;i<id.Length;i++)
+
+                for (int i=0;i<id.Length;i++)
                 {
                     j++;
+                    tbHangHoa pro = new tbHangHoa();
+                    var u = pro.productId;
                     tbCT_PhieuNhap tmp = new tbCT_PhieuNhap {id=id[i], ipBillId = IpBill.ipBillId, amount = amount[i], priceCurrent = priceCurrent[i], productId = productId[i] };
                     IpBillDetailCore.Put(tmp);
+                   // IpBill.priceTotal += amount[i] * priceCurrent[i];
+                   // var a = db.tbHangHoas.Where(s=>s.productId == productId[i]).Select(s => new {  amount = s.amount}).FirstOrDefault();
+                    // a += tmp.amount;
+
                 }
                 for (int i = j; i < productId.Length; i++)
                 {
                     tbCT_PhieuNhap tmp = new tbCT_PhieuNhap{ipBillId=IpBill.ipBillId,amount=amount[i],priceCurrent=priceCurrent[i],productId=productId[i] };
                     IpBillDetailCore.Post(tmp);
+                    //IpBill.priceTotal += amount[i] * priceCurrent[i];
+                    //var a = db.tbHangHoas.Where(s => s.productId == productId[i]).Select(s => new { Nullable<int> Amount = s.amount }).FirstOrDefault();
+                   // a += amount[i];
                 }
+                IpBillCore.Put(IpBill);
             }
             catch
             {

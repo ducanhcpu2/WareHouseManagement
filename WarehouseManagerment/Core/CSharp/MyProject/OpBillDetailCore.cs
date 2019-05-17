@@ -47,12 +47,12 @@ namespace WarehouseManagerment.Core.CSharp
                 return false;
             }
         }
-        public static bool Delete(int opBillId)
+        public static bool Delete(int opBillDetailId)
         {
             try
             {
                 dbQLKho db = new dbQLKho();
-                tbCT_PhieuXuat opBill = db.tbCT_PhieuXuat.Single(x => x.opBillId == opBillId);
+                tbCT_PhieuXuat opBill = db.tbCT_PhieuXuat.Single(x => x.id == opBillDetailId);
                 db.tbCT_PhieuXuat.Remove(opBill);
                 db.SaveChanges();
                 return true;
