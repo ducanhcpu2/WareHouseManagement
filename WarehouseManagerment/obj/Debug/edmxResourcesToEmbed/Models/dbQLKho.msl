@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="dbQLKhoModelStoreContainer" CdmEntityContainer="dbQLKhoEntities">
+  <EntityContainerMapping StorageEntityContainer="dbQLKho_2ModelStoreContainer" CdmEntityContainer="dbQLKho">
     <EntitySetMapping Name="Menus">
-      <EntityTypeMapping TypeName="dbQLKhoModel.Menu">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.Menu">
         <MappingFragment StoreEntitySet="Menu">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
@@ -13,8 +13,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tbCT_PhieuNhap">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbCT_PhieuNhap">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbCT_PhieuNhap">
         <MappingFragment StoreEntitySet="tbCT_PhieuNhap">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="ipBillId" ColumnName="ipBillId" />
@@ -25,7 +36,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbCT_PhieuXuat">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbCT_PhieuXuat">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbCT_PhieuXuat">
         <MappingFragment StoreEntitySet="tbCT_PhieuXuat">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="opBillId" ColumnName="opBillId" />
@@ -36,7 +47,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbHangHoas">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbHangHoa">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbHangHoa">
         <MappingFragment StoreEntitySet="tbHangHoa">
           <ScalarProperty Name="productId" ColumnName="productId" />
           <ScalarProperty Name="productName" ColumnName="productName" />
@@ -47,7 +58,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbLoaiHangHoas">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbLoaiHangHoa">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbLoaiHangHoa">
         <MappingFragment StoreEntitySet="tbLoaiHangHoa">
           <ScalarProperty Name="categoryId" ColumnName="categoryId" />
           <ScalarProperty Name="categoryName" ColumnName="categoryName" />
@@ -55,7 +66,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbNhaPhanPhois">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbNhaPhanPhoi">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbNhaPhanPhoi">
         <MappingFragment StoreEntitySet="tbNhaPhanPhoi">
           <ScalarProperty Name="distributorId" ColumnName="distributorId" />
           <ScalarProperty Name="distributorName" ColumnName="distributorName" />
@@ -66,7 +77,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbNhaSanXuats">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbNhaSanXuat">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbNhaSanXuat">
         <MappingFragment StoreEntitySet="tbNhaSanXuat">
           <ScalarProperty Name="producerId" ColumnName="producerId" />
           <ScalarProperty Name="producerName" ColumnName="producerName" />
@@ -77,7 +88,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbPhieuNhaps">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbPhieuNhap">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbPhieuNhap">
         <MappingFragment StoreEntitySet="tbPhieuNhap">
           <ScalarProperty Name="ipBillId" ColumnName="ipBillId" />
           <ScalarProperty Name="priceTotal" ColumnName="priceTotal" />
@@ -88,7 +99,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbPhieuXuats">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbPhieuXuat">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbPhieuXuat">
         <MappingFragment StoreEntitySet="tbPhieuXuat">
           <ScalarProperty Name="opBillId" ColumnName="opBillId" />
           <ScalarProperty Name="priceTotal" ColumnName="priceTotal" />
@@ -99,7 +110,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbTaiKhoans">
-      <EntityTypeMapping TypeName="dbQLKhoModel.tbTaiKhoan">
+      <EntityTypeMapping TypeName="dbQLKho_2Model.tbTaiKhoan">
         <MappingFragment StoreEntitySet="tbTaiKhoan">
           <ScalarProperty Name="accountName" ColumnName="accountName" />
           <ScalarProperty Name="accountDate" ColumnName="accountDate" />
@@ -115,5 +126,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="dbQLKho_2Model.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="dbQLKho_2Model.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="dbQLKho_2Model.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="dbQLKho_2Model.Store.sp_helpdiagramdefinition" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="dbQLKho_2Model.Store.sp_helpdiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="dbQLKho_2Model.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="dbQLKho_2Model.Store.sp_upgraddiagrams" />
   </EntityContainerMapping>
 </Mapping>

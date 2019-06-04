@@ -59,7 +59,23 @@ namespace WarehouseManagerment.Core.CSharp
             try
             {
                 dbQLKho db = new dbQLKho();
-                tbPhieuNhap ipBill = db.tbPhieuNhaps.Single(x => x.ipBillId==ipBillId);
+                tbPhieuNhap ipBill = db.tbPhieuNhaps.Single(x => x.ipBillId == ipBillId);
+                db.tbPhieuNhaps.Remove(ipBill);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool Delete_2(int ipBillId)
+        {
+            try
+            {
+                dbQLKho db = new dbQLKho();
+                tbPhieuNhap ipBill = db.tbPhieuNhaps.Single( x => x.ipBillId == ipBillId );
                 db.tbPhieuNhaps.Remove(ipBill);
                 db.SaveChanges();
                 return true;

@@ -305,6 +305,9 @@
     <Compile Include="Models\Menu.cs">
       <DependentUpon>dbQLKho.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>dbQLKho.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbCT_PhieuNhap.cs">
       <DependentUpon>dbQLKho.tt</DependentUpon>
     </Compile>
@@ -2910,6 +2913,13 @@
     <Content Include="Core\JavaScript\Notify\README.md" />
     <Content Include="Core\JavaScript\plugins\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Core\JavaScript\plugins\ckfinder\userfiles\.htaccess" />
+    <EntityDeploy Include="Models\dbQLKho.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbQLKho.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\dbQLKho.edmx.diagram">
+      <DependentUpon>dbQLKho.edmx</DependentUpon>
+    </Content>
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -2932,13 +2942,6 @@
     </EntityDeploy>
     <Content Include="Models\dbDiaChi.edmx.diagram">
       <DependentUpon>dbDiaChi.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\dbQLKho.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbQLKho.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\dbQLKho.edmx.diagram">
-      <DependentUpon>dbQLKho.edmx</DependentUpon>
     </Content>
     <Fakes Include="Fakes\CKFinder.fakes" />
     <Content Include="CKFinderScripts\plugins\README.md" />

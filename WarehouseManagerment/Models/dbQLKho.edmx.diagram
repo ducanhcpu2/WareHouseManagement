@@ -4,27 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="98f3512beecc4ca78a9acd4220f9d7b3" Name="Diagram1">
-        <EntityTypeShape EntityType="dbQLKhoModel.Menu" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbCT_PhieuNhap" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbCT_PhieuXuat" Width="1.5" PointX="11.25" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbHangHoa" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbLoaiHangHoa" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbNhaPhanPhoi" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbNhaSanXuat" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbPhieuNhap" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbPhieuXuat" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbQLKhoModel.tbTaiKhoan" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
-        <AssociationConnector Association="dbQLKhoModel.FK__Menu__parentId__21B6055D" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbCT_Phie__ipBil__22AA2996" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbCT_Phie__produ__239E4DCF" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbCT_Phie__opBil__24927208" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbCT_Phie__produ__25869641" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbHangHoa__categ__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbPhieuXu__distr__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbPhieuNh__produ__286302EC" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbPhieuNh__accou__276EDEB3" ManuallyRouted="false" />
-        <AssociationConnector Association="dbQLKhoModel.FK__tbPhieuXu__accou__29572725" ManuallyRouted="false" />
+      <Diagram DiagramId="85d02496cd814effbb35169fe8b34286" Name="Diagram1">
+        <EntityTypeShape EntityType="dbQLKho_2Model.Menu" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.sysdiagram" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbCT_PhieuNhap" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbCT_PhieuXuat" Width="1.5" PointX="11.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbHangHoa" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbLoaiHangHoa" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbNhaPhanPhoi" Width="1.5" PointX="3.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbNhaSanXuat" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbPhieuNhap" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbPhieuXuat" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbQLKho_2Model.tbTaiKhoan" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__Menu__parentId__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbCT_Phie__ipBil__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbCT_Phie__produ__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbCT_Phie__opBil__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbCT_Phie__produ__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbHangHoa__categ__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbPhieuXu__distr__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbPhieuNh__produ__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbPhieuNh__accou__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="dbQLKho_2Model.FK__tbPhieuXu__accou__22AA2996" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

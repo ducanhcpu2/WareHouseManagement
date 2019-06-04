@@ -49,7 +49,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Danh sách học sinh</strong>
+                    <strong class="card-title">Danh sách hàng hóa</strong>
                 </div>
                 <div class="card-body">
                     <div id="bootstrap-data-table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
@@ -117,7 +117,7 @@
     function changeCurrentId(id,name)
     {
         currentId = id;
-        document.getElementById("mess-notify").innerHTML = "Bạn có muốn xóa học sinh </br>"+name;
+        document.getElementById("mess-notify").innerHTML = "Bạn có muốn xóa sản phẩm ? </br>"+name;
     }
     function closeModal()
     {
@@ -127,7 +127,7 @@
     }
     function requestDeleteReader() {
         closeModal();
-        pData = { studentId: currentId };
+        pData = { ProductId: currentId };
         request.put("POST", "/Product/deleteProduct", pData, function (Response) {
             if (Response == true)
             {
